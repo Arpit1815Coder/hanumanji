@@ -1,7 +1,61 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Download, Maximize2, Minimize2, MoreVertical, BookOpen, RefreshCw, Sparkles } from 'lucide-react';
 
-export default function Header({ onOpenLyrics, onOpenSuvichar, onInstallPwa, onToggleAarti, isAartiActive, deviceMode, setDeviceMode, isMobileView }) {
+function HanumanLogoEmblem({ isMobile = false }) {
+  return (
+    <div
+      className={`relative rounded-xl overflow-hidden flex items-center justify-center shrink-0 transition-transform ${
+        isMobile
+          ? 'w-8 h-8 min-[380px]:w-9 min-[380px]:h-9 bg-gradient-to-br from-amber-500 via-orange-500 to-amber-700 p-1 border border-amber-300/80 shadow-sm'
+          : 'w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-amber-400 via-orange-500 to-amber-800 p-1 border border-amber-300/70 shadow-[0_0_14px_rgba(245,158,11,0.6)]'
+      }`}
+    >
+      <svg viewBox="0 0 100 100" className="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="gadaGoldMini" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#fffbeb" />
+            <stop offset="30%" stopColor="#fef08a" />
+            <stop offset="65%" stopColor="#f59e0b" />
+            <stop offset="100%" stopColor="#92400e" />
+          </linearGradient>
+          <radialGradient id="sunAuraMini" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#fef08a" stopOpacity="0.9" />
+            <stop offset="60%" stopColor="#f59e0b" stopOpacity="0.45" />
+            <stop offset="100%" stopColor="#b45309" stopOpacity="0.1" />
+          </radialGradient>
+        </defs>
+
+        {/* Radiant Solar Background Disc */}
+        <circle cx="50" cy="50" r="44" fill="url(#sunAuraMini)" />
+        <circle cx="50" cy="50" r="45" stroke="#fef08a" strokeWidth="1.5" strokeOpacity="0.8" strokeDasharray="3 2" />
+
+        {/* Sacred Bajrangbali Gada (Mace) Iconography */}
+        <line x1="30" y1="70" x2="62" y2="38" stroke="url(#gadaGoldMini)" strokeWidth="4.5" strokeLinecap="round" />
+        <circle cx="28" cy="72" r="4" fill="url(#gadaGoldMini)" stroke="#78350f" strokeWidth="1" />
+        <path
+          d="M 64 26 C 58 32 55 42 66 53 C 77 64 87 61 93 55 C 96 42 77 23 64 26 Z"
+          transform="translate(-16, -2)"
+          fill="url(#gadaGoldMini)"
+          stroke="#78350f"
+          strokeWidth="1.2"
+        />
+        <polygon points="56,17 61,24 51,24" fill="#ffffff" />
+
+        {/* Sacred Urdhva Pundra Tilak (Chandan + Sindoor) */}
+        <g transform="translate(42, 42)">
+          {/* White Sandalwood V-shape */}
+          <path d="M 0 0 L 5 24 C 7 27 11 27 13 24 L 18 0 L 14 0 L 9 18 L 4 0 Z" fill="#ffffff" />
+          {/* Red Vermilion/Sindoor Streak */}
+          <path d="M 8 2 L 8 21 C 8 22 10 22 10 21 L 10 2 Z" fill="#ef4444" />
+          {/* Bottom Tilak Lotus Dot */}
+          <circle cx="9" cy="25" r="1.5" fill="#ef4444" />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+export default function Header({ onOpenLyrics, onOpenSuvichar, onInstallPwa, onToggleAarti, isAartiActive, isMobileView }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
@@ -60,56 +114,26 @@ export default function Header({ onOpenLyrics, onOpenSuvichar, onInstallPwa, onT
       <div
         onClick={() => window.location.reload()}
         title="Tap to refresh Shri Hanuman Chalisa"
-        className="flex items-center space-x-1.5 sm:space-x-2.5 bg-transparent p-0 border-0 outline-none select-none shrink-0 cursor-pointer active:scale-95 transition-transform"
+        className="flex items-center space-x-2 sm:space-x-3 bg-transparent p-0 border-0 outline-none select-none shrink-0 cursor-pointer active:scale-95 transition-transform"
       >
-        <span className={`text-xl sm:text-2xl ${isMobileView ? 'filter-none' : 'filter drop-shadow-[0_0_8px_rgba(245,158,11,0.9)]'}`}>🕉️</span>
-        <h1 className={`font-['Rozha_One',serif] text-base min-[390px]:text-lg sm:text-xl md:text-2xl font-semibold tracking-wide leading-tight ${
-          isMobileView
-            ? 'text-slate-900'
-            : 'text-transparent bg-clip-text bg-gradient-to-r from-amber-100 via-amber-200 to-amber-400 drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)]'
-        }`}>
-          श्री हनुमान चालीसा
-        </h1>
-      </div>
+        {/* Custom Sacred Hanuman Ji Logo Insignia */}
+        <HanumanLogoEmblem isMobile={isMobileView} />
 
-      {/* Center on wide screens: Quick Device View Switcher for Instant Live Testing */}
-      {setDeviceMode && (
-        <div className="hidden lg:flex items-center space-x-1 bg-black/40 border border-white/10 p-0.5 rounded-full text-xs backdrop-blur-md">
-          <button
-            onClick={() => setDeviceMode('mobile')}
-            className={`px-2.5 py-1 rounded-full transition-all cursor-pointer font-medium ${
-              deviceMode === 'mobile'
-                ? 'bg-amber-400 text-slate-950 font-bold shadow-sm'
-                : 'text-slate-300 hover:text-white'
-            }`}
-            title="Switch to Mobile View (See 50% midpoint image & 2-2-1 grid)"
-          >
-            📱 Mobile
-          </button>
-          <button
-            onClick={() => setDeviceMode('tablet')}
-            className={`px-2.5 py-1 rounded-full transition-all cursor-pointer font-medium ${
-              deviceMode === 'tablet'
-                ? 'bg-amber-400 text-slate-950 font-bold shadow-sm'
-                : 'text-slate-300 hover:text-white'
-            }`}
-            title="Switch to Tablet View"
-          >
-            📟 Tablet
-          </button>
-          <button
-            onClick={() => setDeviceMode('laptop')}
-            className={`px-2.5 py-1 rounded-full transition-all cursor-pointer font-medium ${
-              deviceMode === 'laptop'
-                ? 'bg-amber-400 text-slate-950 font-bold shadow-sm'
-                : 'text-slate-300 hover:text-white'
-            }`}
-            title="Switch to Laptop View"
-          >
-            💻 Laptop
-          </button>
+        <div className="flex flex-col text-left">
+          <h1 className={`font-['Rozha_One',serif] text-base min-[390px]:text-lg sm:text-xl md:text-2xl font-semibold tracking-wide leading-none ${
+            isMobileView
+              ? 'text-slate-900'
+              : 'text-transparent bg-clip-text bg-gradient-to-r from-amber-100 via-amber-200 to-amber-400 drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)]'
+          }`}>
+            श्री हनुमान चालीसा
+          </h1>
+          <span className={`text-[9.5px] sm:text-[11px] font-sans tracking-widest uppercase mt-0.5 ${
+            isMobileView ? 'text-amber-800 font-semibold' : 'text-amber-300/80 font-medium'
+          }`}>
+            Mood Chants
+          </span>
         </div>
-      )}
+      </div>
 
       {/* Right on Tablet & Laptop: Direct Action Buttons */}
       {!isMobileView && (
@@ -209,32 +233,6 @@ export default function Header({ onOpenLyrics, onOpenSuvichar, onInstallPwa, onT
                   <Sparkles className="w-4 h-4 text-amber-600 shrink-0" />
                   <span>दैनिक सुविचार (WhatsApp Status)</span>
                 </button>
-              )}
-
-              {setDeviceMode && (
-                <div className="px-3 py-2 border-y border-slate-200/60 my-1">
-                  <span className="text-[10px] uppercase font-bold text-slate-400 block mb-1">Layout Mode</span>
-                  <div className="grid grid-cols-2 gap-1">
-                    <button
-                      onClick={() => {
-                        setDeviceMode('mobile');
-                        setMenuOpen(false);
-                      }}
-                      className="px-2 py-1 bg-amber-100 text-slate-900 font-bold rounded-lg text-center"
-                    >
-                      📱 Mobile
-                    </button>
-                    <button
-                      onClick={() => {
-                        setDeviceMode('laptop');
-                        setMenuOpen(false);
-                      }}
-                      className="px-2 py-1 bg-slate-100 text-slate-700 hover:bg-slate-200 font-medium rounded-lg text-center"
-                    >
-                      💻 Laptop
-                    </button>
-                  </div>
-                </div>
               )}
 
               {onInstallPwa && (

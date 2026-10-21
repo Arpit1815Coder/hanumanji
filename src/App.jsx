@@ -221,8 +221,6 @@ export default function App() {
                 onInstallPwa={handleInstallClick}
                 onToggleAarti={() => setAartiActive((prev) => !prev)}
                 isAartiActive={aartiActive}
-                deviceMode={deviceMode}
-                setDeviceMode={setDeviceMode}
                 isMobileView={true}
               />
             </div>
@@ -308,8 +306,6 @@ export default function App() {
               onInstallPwa={handleInstallClick}
               onToggleAarti={() => setAartiActive((prev) => !prev)}
               isAartiActive={aartiActive}
-              deviceMode={deviceMode}
-              setDeviceMode={setDeviceMode}
               isMobileView={false}
             />
           </div>

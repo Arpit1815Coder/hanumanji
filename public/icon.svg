@@ -1,125 +1,90 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
+    <!-- Background Radial Gradient -->
     <radialGradient id="bgGrad" cx="50%" cy="50%" r="50%">
       <stop offset="0%" stop-color="#b45309" />
       <stop offset="50%" stop-color="#78350f" />
-      <stop offset="100%" stop-color="#1c0e04" />
+      <stop offset="100%" stop-color="#180b03" />
     </radialGradient>
     
+    <!-- Rich Golden Gradient -->
     <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fef08a" />
-      <stop offset="35%" stop-color="#f59e0b" />
-      <stop offset="70%" stop-color="#d97706" />
-      <stop offset="100%" stop-color="#b45309" />
+      <stop offset="0%" stop-color="#fffbeb" />
+      <stop offset="25%" stop-color="#fef08a" />
+      <stop offset="55%" stop-color="#f59e0b" />
+      <stop offset="85%" stop-color="#d97706" />
+      <stop offset="100%" stop-color="#92400e" />
     </linearGradient>
 
-    <linearGradient id="saffronGlow" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.8" />
-      <stop offset="100%" stop-color="#dc2626" stop-opacity="0" />
-    </linearGradient>
+    <!-- Saffron Sun Aura -->
+    <radialGradient id="sunAura" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.85" />
+      <stop offset="55%" stop-color="#f59e0b" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#b45309" stop-opacity="0" />
+    </radialGradient>
 
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="8" result="blur" />
+    <!-- Divine Glow Filter -->
+    <filter id="divineGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
       <feComposite in="SourceGraphic" in2="blur" operator="over" />
     </filter>
   </defs>
 
-  <!-- Background Circle with Sacred Border -->
+  <!-- App Rounded Icon Base -->
   <rect width="512" height="512" rx="128" fill="url(#bgGrad)" />
-  <rect width="496" height="496" x="8" y="8" rx="120" fill="none" stroke="url(#goldGrad)" stroke-width="4" stroke-opacity="0.6" stroke-dasharray="8 6" />
-  
-  <!-- Outer Aura Ring -->
-  <circle cx="256" cy="256" r="210" fill="none" stroke="#f59e0b" stroke-width="2" stroke-opacity="0.3" />
-  <circle cx="256" cy="256" r="195" fill="none" stroke="url(#goldGrad)" stroke-width="3" stroke-opacity="0.5" />
+  <rect width="492" height="492" x="10" y="10" rx="120" fill="none" stroke="url(#goldGrad)" stroke-width="4" stroke-opacity="0.75" stroke-dasharray="10 8" />
 
-  <!-- Radiating Sun Rays / Halo -->
-  <g stroke="url(#goldGrad)" stroke-width="2.5" stroke-linecap="round" opacity="0.4">
-    <line x1="256" y1="56" x2="256" y2="76" />
-    <line x1="256" y1="436" x2="256" y2="456" />
-    <line x1="56" y1="256" x2="76" y2="256" />
-    <line x1="436" y1="256" x2="456" y2="256" />
-    <line x1="115" y1="115" x2="129" y2="129" />
-    <line x1="383" y1="383" x2="397" y2="397" />
-    <line x1="115" y1="397" x2="129" y2="383" />
-    <line x1="383" y1="129" x2="397" y2="115" />
-    <line x1="256" y1="40" x2="256" y2="50" />
-    <line x1="180" y1="65" x2="188" y2="82" />
-    <line x1="332" y1="65" x2="324" y2="82" />
-    <line x1="65" y1="180" x2="82" y2="188" />
-    <line x1="447" y1="180" x2="430" y2="188" />
+  <!-- Radiating Sacred Sunbeams -->
+  <g stroke="url(#goldGrad)" stroke-width="3" stroke-linecap="round" opacity="0.45">
+    <line x1="256" y1="48" x2="256" y2="78" />
+    <line x1="256" y1="434" x2="256" y2="464" />
+    <line x1="48" y1="256" x2="78" y2="256" />
+    <line x1="434" y1="256" x2="464" y2="256" />
+    <line x1="108" y1="108" x2="130" y2="130" />
+    <line x1="382" y1="382" x2="404" y2="404" />
+    <line x1="108" y1="404" x2="130" y2="382" />
+    <line x1="382" y1="130" x2="404" y2="108" />
   </g>
 
-  <!-- Sacred Bajrangbali Gada (Mace) Silhouette (Backdrop / Crossed or Center) -->
-  <g transform="translate(256, 260) rotate(-35) translate(-256, -260)" opacity="0.35" filter="url(#glow)">
-    <!-- Mace Head -->
-    <path d="M 230 110 C 210 130 205 160 215 185 C 225 210 245 220 256 222 C 267 220 287 210 297 185 C 307 160 302 130 282 110 Z" fill="url(#goldGrad)" />
-    <!-- Mace Top Finial -->
-    <polygon points="256,80 263,105 249,105" fill="#fef08a" />
-    <circle cx="256" cy="80" r="5" fill="#fff" />
+  <!-- Central Solar Disc -->
+  <circle cx="256" cy="245" r="170" fill="url(#sunAura)" />
+  <circle cx="256" cy="245" r="172" fill="none" stroke="url(#goldGrad)" stroke-width="3" stroke-opacity="0.6" stroke-dasharray="6 4" />
+
+  <!-- Sacred Bajrangbali Gada (Mace) Iconography -->
+  <g transform="translate(256, 250) rotate(-35) translate(-256, -250)" filter="url(#divineGlow)">
+    <!-- Mace Head (Bulbous Fluted Dome) -->
+    <path d="M 218 85 C 190 115 185 155 200 190 C 215 225 242 240 256 242 C 270 240 297 225 312 190 C 327 155 322 115 294 85 Z" fill="url(#goldGrad)" stroke="#78350f" stroke-width="3" />
+    <!-- Fluting Ridge Accents -->
+    <path d="M 256 80 L 256 242" stroke="#fffbeb" stroke-width="2.5" opacity="0.6" />
+    <path d="M 230 100 C 220 140 230 200 242 230" stroke="#fffbeb" stroke-width="2" opacity="0.5" />
+    <path d="M 282 100 C 292 140 282 200 270 230" stroke="#fffbeb" stroke-width="2" opacity="0.5" />
+
+    <!-- Mace Crown / Spike -->
+    <polygon points="256,48 266,85 246,85" fill="#fff" stroke="#f59e0b" stroke-width="2" />
+    <circle cx="256" cy="46" r="6" fill="#fff" />
+
     <!-- Mace Shaft -->
-    <rect x="250" y="220" width="12" height="200" rx="4" fill="url(#goldGrad)" />
-    <!-- Mace Base Handle Knob -->
-    <circle cx="256" cy="425" r="16" fill="url(#goldGrad)" />
-    <circle cx="256" cy="425" r="7" fill="#78350f" />
+    <rect x="249" y="240" width="14" height="200" rx="6" fill="url(#goldGrad)" stroke="#78350f" stroke-width="2" />
+    <!-- Shaft Grip Bands -->
+    <line x1="249" y1="290" x2="263" y2="290" stroke="#78350f" stroke-width="2.5" />
+    <line x1="249" y1="340" x2="263" y2="340" stroke="#78350f" stroke-width="2.5" />
+    <line x1="249" y1="390" x2="263" y2="390" stroke="#78350f" stroke-width="2.5" />
+
+    <!-- Mace Bottom Finial Knob -->
+    <circle cx="256" cy="445" r="18" fill="url(#goldGrad)" stroke="#78350f" stroke-width="2.5" />
+    <circle cx="256" cy="445" r="8" fill="#78350f" />
   </g>
 
-  <!-- Divine Glowing Om (ॐ) Center Symbol -->
-  <g filter="url(#glow)">
-    <!-- Om Aura Glow Circle -->
-    <circle cx="256" cy="245" r="105" fill="#f59e0b" fill-opacity="0.12" />
-    
-    <!-- Sacred Devanagari OM Shape -->
-    <path d="M 225 185 
-             C 215 170 195 160 175 165 
-             C 145 173 130 205 140 235 
-             C 147 257 168 270 192 272 
-             C 165 277 140 298 135 328 
-             C 127 365 156 400 195 400 
-             C 230 400 258 375 264 340 
-             L 242 334 
-             C 238 355 220 375 195 375 
-             C 173 375 158 355 162 333 
-             C 167 308 190 292 215 292 
-             L 225 292 
-             L 225 270 
-             L 215 270 
-             C 190 270 165 252 165 230 
-             C 165 210 178 190 198 188 
-             C 215 186 228 196 235 210 
-             Z" 
-          fill="url(#goldGrad)" stroke="#fffbeb" stroke-width="1.5" />
-
-    <!-- Om Right Arc / Tail -->
-    <path d="M 220 280 
-             C 255 280 295 295 325 330 
-             C 345 354 360 380 375 410 
-             L 395 400 
-             C 378 368 360 338 338 312 
-             C 302 270 255 255 215 255 
-             Z" 
-          fill="url(#goldGrad)" />
-
-    <!-- Chandra (Crescent Moon) -->
-    <path d="M 285 175 
-             C 320 175 355 195 375 220 
-             C 355 208 325 200 290 200 
-             C 265 200 245 206 230 215 
-             C 242 190 262 175 285 175 
-             Z" 
-          fill="url(#goldGrad)" />
-
-    <!-- Bindu (Divine Dot) -->
-    <circle cx="305" cy="148" r="14" fill="url(#goldGrad)" stroke="#fef08a" stroke-width="1" />
+  <!-- Auspicious Sacred Urdhva Pundra Tilak (Chandan & Sindoor) -->
+  <g transform="translate(256, 175)" filter="url(#divineGlow)">
+    <!-- White / Yellow Sandalwood V-Shape -->
+    <path d="M -24 -45 L -8 28 C -3 36 3 36 8 28 L 24 -45 L 15 -45 L 0 16 L -15 -45 Z" fill="#ffffff" stroke="#fef08a" stroke-width="2" />
+    <!-- Radiant Red Sindoor (Vermilion) Central Flame Streak -->
+    <path d="M -4 -42 L -4 20 C -4 24 4 24 4 20 L 4 -42 Z" fill="#dc2626" />
+    <!-- Auspicious Sindoor Lotus Bindi at Base -->
+    <circle cx="0" cy="34" r="5" fill="#dc2626" />
   </g>
 
-  <!-- Divine Hanuman Ji Tilak (Urdhva Pundra & Red Vermilion/Sindoor Mark) -->
-  <g transform="translate(256, 95)">
-    <!-- White / Yellow Chandan V-shape -->
-    <path d="M -16 -20 L -6 20 C -2 24 2 24 6 20 L 16 -20 L 10 -20 L 0 12 L -10 -20 Z" fill="#fef08a" opacity="0.9" />
-    <!-- Red Vermilion Sindoor Center Line -->
-    <path d="M -2.5 -18 L -2.5 15 C -2.5 17 2.5 17 2.5 15 L 2.5 -18 Z" fill="#dc2626" />
-  </g>
-
-  <!-- Bottom Devotional Banner Text -->
-  <text x="256" y="475" text-anchor="middle" font-family="'Cinzel', serif, sans-serif" font-size="22" font-weight="bold" fill="#fef08a" letter-spacing="4" opacity="0.9">॥ जय श्री राम ॥</text>
+  <!-- Sacred Sanskrit Footer Calligraphy -->
+  <text x="256" y="478" text-anchor="middle" font-family="'Rozha One', 'Cinzel', serif, sans-serif" font-size="24" font-weight="bold" fill="#fef08a" letter-spacing="4" filter="url(#divineGlow)">॥ ॐ हनुमते नमः ॥</text>
 </svg>
