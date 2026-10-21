@@ -12,17 +12,16 @@ function checkImageAvailable(url) {
   });
 }
 
-export default function DarshanFrame({ activeMood, isPlaying }) {
-  const [isMobile, setIsMobile] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    return window.innerWidth < 768;
-  });
+export default function DarshanFrame({ activeMood, isPlaying, isMobileView }) {
+  const [windowWidth, setWindowWidth] = useState(() => (typeof window !== 'undefined' ? window.innerWidth : 1024));
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    const handleResize = () => setWindowWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  const isMobile = isMobileView !== undefined ? isMobileView : windowWidth < 768;
 
   const [imgSrc, setImgSrc] = useState(
     () => `${activeMood?.imageSrc || '/images/hanuman-original.jpg'}?v=${CACHE_KEY}`
@@ -89,8 +88,10 @@ export default function DarshanFrame({ activeMood, isPlaying }) {
     };
   }, [activeMood?.id, activeMood?.imageSrc, isMobile]);
 
+  if (!isMobile) return null;
+
   return (
-    <div className="md:hidden flex-1 w-full flex flex-col items-center justify-end pb-0 px-3 z-10 pointer-events-none select-none">
+    <div className="flex-1 w-full flex flex-col items-center justify-end pb-0 px-3 z-10 pointer-events-none select-none">
       <div className="relative group pointer-events-auto flex items-center justify-center">
         {/* Divine Ambient Radial Halo Behind the Picture Card */}
         <div
