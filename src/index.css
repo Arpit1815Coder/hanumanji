@@ -1,0 +1,243 @@
+@import "tailwindcss";
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    touch-action: manipulation;
+  }
+}
+
+/* Warm & Cool Sacred Glassmorphism */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  box-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.5), 0 0 20px rgba(245, 158, 11, 0.08);
+}
+
+.glass-pill {
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.glass-pill:hover {
+  background: rgba(30, 41, 59, 0.6);
+  border-color: rgba(251, 191, 36, 0.5);
+  color: #fef3c7;
+}
+
+.glass-pill-active {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.4), rgba(217, 119, 6, 0.45));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(254, 240, 138, 0.7);
+  box-shadow: 0 0 24px rgba(245, 158, 11, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.4);
+}
+
+/* Audio Scrubber Slider Custom Styles */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+/* WebKit Slider Thumb */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background: #fef08a;
+  border: 2px solid #b45309;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.8);
+  margin-top: -4px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb,
+input[type="range"]:active::-webkit-slider-thumb {
+  transform: scale(1.4);
+  box-shadow: 0 0 16px rgba(251, 191, 36, 1);
+}
+
+/* WebKit Slider Track */
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 3.5px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Firefox Slider */
+input[type="range"]::-moz-range-thumb {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background: #fef08a;
+  border: 2px solid #b45309;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.8);
+  transition: transform 0.15s ease;
+}
+
+input[type="range"]::-moz-range-track {
+  width: 100%;
+  height: 3.5px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Mobile Safe Area Padding */
+.safe-pb {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0.75rem));
+}
+
+.safe-pt {
+  padding-top: max(0.6rem, env(safe-area-inset-top, 0.6rem));
+}
+
+/* Subtle Golden Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(245, 158, 11, 0.35);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(245, 158, 11, 0.65);
+}
+
+/* Aarti Flame & Ember Animations */
+@keyframes flame-flicker {
+  0%, 100% {
+    transform: scale(1) rotate(-1deg);
+    opacity: 0.95;
+  }
+  25% {
+    transform: scale(1.08, 0.96) rotate(1.5deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.97, 1.05) rotate(-2deg);
+    opacity: 0.92;
+  }
+  75% {
+    transform: scale(1.04, 1.02) rotate(1deg);
+    opacity: 0.98;
+  }
+}
+
+.animate-flame {
+  animation: flame-flicker 1.6s infinite ease-in-out;
+  transform-origin: bottom center;
+}
+
+@keyframes flame-glow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.1);
+  }
+}
+
+.animate-flame-glow {
+  animation: flame-glow 2.2s infinite ease-in-out;
+}
+
+/* Ethereal Illuminated Text for Mood Buttons */
+.glow-text-active {
+  color: #fef08a !important;
+  text-shadow: 0 0 8px rgba(251, 191, 36, 0.95), 0 0 16px rgba(245, 158, 11, 0.85), 0 0 24px rgba(217, 119, 6, 0.7);
+}
+
+/* Sacred Sitaram Meditative Breathing Animation for Zen Mode */
+@keyframes sitaram-breathe {
+  0%, 100% {
+    opacity: 0.20;
+    transform: scale(0.96);
+    filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.35));
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.04);
+    filter: drop-shadow(0 0 28px rgba(251, 191, 36, 0.95));
+  }
+}
+
+.animate-sitaram {
+  animation: sitaram-breathe 3.2s infinite ease-in-out;
+}
+
+/* Cool Crystal Cyan/Sky Scrollbar for Chalisa Paath Modal */
+.cool-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(56, 189, 248, 0.45) rgba(15, 23, 42, 0.25);
+}
+
+.cool-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cool-scrollbar::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.25);
+  border-radius: 9999px;
+  margin: 8px 0;
+}
+
+.cool-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.5), rgba(14, 165, 233, 0.7));
+  border-radius: 9999px;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+}
+
+.cool-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.8), rgba(14, 165, 233, 1));
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.8);
+}
+
+/* Miniature Devotional Equalizer Wave for Mood Buttons */
+@keyframes mini-wave-1 {
+  0%, 100% { height: 3px; }
+  50% { height: 10px; }
+}
+@keyframes mini-wave-2 {
+  0%, 100% { height: 10px; }
+  50% { height: 4px; }
+}
+@keyframes mini-wave-3 {
+  0%, 100% { height: 5px; }
+  50% { height: 11px; }
+}
+
+.mini-wave-bar-1 {
+  animation: mini-wave-1 0.85s infinite ease-in-out;
+}
+.mini-wave-bar-2 {
+  animation: mini-wave-2 0.7s infinite ease-in-out 0.15s;
+}
+.mini-wave-bar-3 {
+  animation: mini-wave-3 0.95s infinite ease-in-out 0.3s;
+}

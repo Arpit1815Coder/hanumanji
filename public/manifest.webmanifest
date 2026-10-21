@@ -1,0 +1,25 @@
+{
+  "name": "Hanuman Chalisa • Mood Chants",
+  "short_name": "Hanuman Chalisa",
+  "description": "Spiritual, ultra-clean devotional player for Shri Hanuman Chalisa across 5 sacred moods (Original, Peaceful, Happy, Motivational, Powerful)",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0908",
+  "theme_color": "#d97706",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "categories": ["music", "lifestyle", "spirituality"],
+  "screenshots": []
+}
