@@ -14,46 +14,46 @@ export default function MoodSelectorBar({ activeMoodId, onSelectMood, isPlaying 
           onSelectMood(mood.id);
         }}
         title={isActive ? (isPlaying ? 'Chanting active • Tap to pause' : 'Paused • Tap to chant') : `Switch to ${mood.title}`}
-        className={`w-full h-8 min-[380px]:h-9 px-3 rounded-full flex items-center justify-center gap-1.5 transition-all duration-300 cursor-pointer select-none active:scale-95 border ${
+        className={`w-full h-11 min-[380px]:h-12 px-4 min-[380px]:px-5 rounded-full flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer select-none active:scale-95 border ${
           isGlowing
-            ? 'bg-amber-400/25 border-amber-300/80 text-amber-200 shadow-[0_0_12px_rgba(245,158,11,0.4)]'
+            ? 'bg-amber-400 text-slate-950 font-bold border-amber-300 shadow-[0_4px_16px_rgba(245,158,11,0.45)] scale-[1.02]'
             : isActive
-            ? 'bg-amber-500/20 border-amber-400/50 text-amber-200'
-            : 'bg-black/40 hover:bg-white/10 border-white/10 text-white/75 hover:text-white'
+            ? 'bg-amber-400/90 text-slate-950 font-bold border-amber-300 shadow-[0_2px_12px_rgba(245,158,11,0.3)]'
+            : 'bg-white/85 hover:bg-white text-slate-800 border-slate-200/90 shadow-[0_2px_8px_rgba(0,0,0,0.06)]'
         }`}
       >
-        <span className="text-xs min-[380px]:text-sm shrink-0">{mood.emoji}</span>
-        <span className="text-[11px] min-[380px]:text-xs font-semibold tracking-wide whitespace-nowrap">
+        <span className="text-base min-[380px]:text-lg shrink-0">{mood.emoji}</span>
+        <span className={`text-xs min-[380px]:text-[13px] tracking-wide whitespace-nowrap ${isActive ? 'font-bold text-slate-950' : 'font-semibold text-slate-800'}`}>
           {mood.title}
         </span>
         {isGlowing ? (
           <div className="flex items-center space-x-0.5 ml-1">
-            <span className="w-[1.5px] h-2 bg-amber-400 rounded-full mini-wave-bar-1" />
-            <span className="w-[1.5px] h-2 bg-amber-300 rounded-full mini-wave-bar-2" />
-            <span className="w-[1.5px] h-2 bg-amber-400 rounded-full mini-wave-bar-3" />
+            <span className="w-[2px] h-2.5 bg-slate-950 rounded-full mini-wave-bar-1" />
+            <span className="w-[2px] h-2.5 bg-slate-950 rounded-full mini-wave-bar-2" />
+            <span className="w-[2px] h-2.5 bg-slate-950 rounded-full mini-wave-bar-3" />
           </div>
         ) : isActive ? (
-          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_6px_#f59e0b] ml-0.5" />
+          <span className="w-1.5 h-1.5 rounded-full bg-slate-950 ml-0.5" />
         ) : null}
       </button>
     );
   };
 
   return (
-    <div className="relative z-20 w-full select-none flex items-center justify-center pb-1 px-1 sm:px-4">
-      {/* 1. Mobile Only (< md): 2 - 2 - 1 Grid Layout */}
-      <div className="md:hidden w-full max-w-[320px] min-[380px]:max-w-[350px] mx-auto">
+    <div className="relative z-20 w-full select-none flex items-center justify-center pb-0 px-2 sm:px-4">
+      {/* 1. Mobile Only (< md): Fuller 2 - 2 - 1 Grid Dashboard */}
+      <div className="md:hidden w-full max-w-[365px] min-[390px]:max-w-[395px] mx-auto">
         {/* Row 1: 2 buttons */}
-        <div className="grid grid-cols-2 gap-2 mb-2">
+        <div className="grid grid-cols-2 gap-2.5 min-[380px]:gap-3 mb-2.5 min-[380px]:mb-3">
           {MOODS.slice(0, 2).map(renderMobileMoodBtn)}
         </div>
         {/* Row 2: 2 buttons */}
-        <div className="grid grid-cols-2 gap-2 mb-2">
+        <div className="grid grid-cols-2 gap-2.5 min-[380px]:gap-3 mb-2.5 min-[380px]:mb-3">
           {MOODS.slice(2, 4).map(renderMobileMoodBtn)}
         </div>
         {/* Row 3: 1 button (centered) */}
         <div className="flex justify-center">
-          <div className="w-[calc(50%-4px)]">
+          <div className="w-[52%] min-[380px]:w-[50%]">
             {renderMobileMoodBtn(MOODS[4])}
           </div>
         </div>

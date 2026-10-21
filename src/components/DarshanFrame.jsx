@@ -90,21 +90,21 @@ export default function DarshanFrame({ activeMood, isPlaying }) {
   }, [activeMood?.id, activeMood?.imageSrc, isMobile]);
 
   return (
-    <div className="flex-1 md:hidden w-full flex flex-col items-center justify-start pt-0 min-[380px]:pt-1 pb-1 px-3 min-[400px]:px-4 z-10 pointer-events-none select-none">
-      <div className="relative w-full max-w-[420px] group pointer-events-auto flex items-center justify-center">
+    <div className="md:hidden w-full flex flex-col items-center justify-start pt-1 pb-2 px-3 z-10 pointer-events-none select-none">
+      <div className="relative group pointer-events-auto flex items-center justify-center">
         {/* Divine Ambient Radial Halo Behind the Picture Card */}
         <div
-          className={`absolute -inset-2.5 rounded-2xl sm:rounded-3xl transition-all duration-1000 pointer-events-none blur-2xl ${
-            isPlaying ? 'opacity-50 scale-105' : 'opacity-20 scale-95'
+          className={`absolute -inset-3 rounded-2xl sm:rounded-3xl transition-all duration-1000 pointer-events-none blur-2xl ${
+            isPlaying ? 'opacity-60 scale-105' : 'opacity-25 scale-95'
           }`}
           style={{
             background: `radial-gradient(circle, ${activeMood?.themeColor || '#f59e0b'} 0%, rgba(245, 158, 11, 0.25) 45%, transparent 75%)`
           }}
         />
 
-        {/* Full-width as Original with Subtle Side Margins and Original Height Proportions */}
+        {/* Sacred Darshan Frame - Balanced Proportions for Mobile Screens */}
         <div
-          className={`relative w-full aspect-[1013/1064] max-h-[42vh] rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_16px_50px_rgba(0,0,0,0.95),0_0_35px_rgba(245,158,11,0.3)] border border-amber-300/40 transition-transform duration-700 ease-out ${
+          className={`relative w-[240px] h-[252px] min-[380px]:w-[265px] min-[380px]:h-[278px] min-[410px]:w-[290px] min-[410px]:h-[304px] max-w-[76vw] max-h-[35vh] aspect-[1013/1064] rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_12px_36px_rgba(0,0,0,0.14),0_4px_20px_rgba(245,158,11,0.22)] border-2 border-amber-300/60 transition-transform duration-700 ease-out bg-white/40 ${
             isPlaying ? 'scale-[1.01]' : 'scale-100'
           }`}
         >
@@ -129,7 +129,7 @@ export default function DarshanFrame({ activeMood, isPlaying }) {
           />
 
           {/* Glass Inner Border Rim */}
-          <div className="absolute inset-0 rounded-2xl sm:rounded-3xl border border-white/20 pointer-events-none" />
+          <div className="absolute inset-0 rounded-2xl sm:rounded-3xl border border-white/40 pointer-events-none" />
         </div>
       </div>
     </div>

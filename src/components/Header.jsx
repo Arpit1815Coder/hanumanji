@@ -43,10 +43,10 @@ export default function Header({ onOpenLyrics, onInstallPwa, onToggleAarti, isAa
       <div
         onClick={() => window.location.reload()}
         title="Tap to refresh Shri Hanuman Chalisa"
-        className="flex items-center space-x-1.5 sm:space-x-2.5 bg-transparent p-0 border-0 outline-none select-none filter drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] shrink-0 cursor-pointer active:scale-95 transition-transform"
+        className="flex items-center space-x-1.5 sm:space-x-2.5 bg-transparent p-0 border-0 outline-none select-none filter drop-shadow-[0_2px_12px_rgba(0,0,0,0.15)] md:drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] shrink-0 cursor-pointer active:scale-95 transition-transform"
       >
         <span className="text-xl sm:text-2xl filter drop-shadow-[0_0_8px_rgba(245,158,11,0.9)]">🕉️</span>
-        <h1 className="font-['Rozha_One',serif] text-base min-[390px]:text-lg sm:text-xl md:text-2xl font-normal tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-amber-100 via-amber-200 to-amber-400 leading-tight">
+        <h1 className="font-['Rozha_One',serif] text-base min-[390px]:text-lg sm:text-xl md:text-2xl font-semibold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-amber-900 to-amber-700 md:from-amber-100 md:via-amber-200 md:to-amber-400 leading-tight">
           श्री हनुमान चालीसा
         </h1>
       </div>
@@ -110,17 +110,17 @@ export default function Header({ onOpenLyrics, onInstallPwa, onToggleAarti, isAa
             e.stopPropagation();
             setMenuOpen((prev) => !prev);
           }}
-          className="p-2 rounded-full text-white/80 hover:text-white hover:bg-white/10 active:scale-90 transition-all cursor-pointer border border-white/10 bg-black/30 backdrop-blur-md"
+          className="p-2 rounded-full text-slate-700 hover:text-slate-900 hover:bg-slate-200/80 active:scale-90 transition-all cursor-pointer border border-slate-300/80 bg-white/80 backdrop-blur-md shadow-sm"
           title="Options"
           aria-label="Options Menu"
         >
-          <MoreVertical className="w-4 h-4 sm:w-5 sm:h-5" />
+          <MoreVertical className="w-4 h-4 sm:w-5 sm:h-5 text-slate-700" />
         </button>
 
         {/* Dropdown Menu */}
         {menuOpen && (
           <div
-            className="absolute right-0 top-full mt-2 w-48 bg-slate-950/95 text-white rounded-2xl shadow-2xl border border-white/15 p-1.5 z-50 flex flex-col text-xs select-none backdrop-blur-2xl animate-fade-in"
+            className="absolute right-0 top-full mt-2 w-48 bg-white/95 text-slate-800 rounded-2xl shadow-2xl border border-slate-200/90 p-1.5 z-50 flex flex-col text-xs select-none backdrop-blur-2xl animate-fade-in"
             onClick={(e) => e.stopPropagation()}
           >
             {onInstallPwa && (
@@ -129,10 +129,10 @@ export default function Header({ onOpenLyrics, onInstallPwa, onToggleAarti, isAa
                   setMenuOpen(false);
                   onInstallPwa();
                 }}
-                className="flex items-center space-x-2.5 px-3 py-2.5 rounded-xl hover:bg-white/10 text-left text-amber-300 transition-colors cursor-pointer w-full"
+                className="flex items-center space-x-2.5 px-3 py-2.5 rounded-xl hover:bg-amber-50 text-left text-amber-800 transition-colors cursor-pointer w-full"
               >
-                <Download className="w-4 h-4 text-amber-300 shrink-0" />
-                <span className="font-medium">Install App</span>
+                <Download className="w-4 h-4 text-amber-600 shrink-0" />
+                <span className="font-semibold">Install App</span>
               </button>
             )}
 
@@ -141,16 +141,16 @@ export default function Header({ onOpenLyrics, onInstallPwa, onToggleAarti, isAa
                 setMenuOpen(false);
                 toggleFullscreen();
               }}
-              className="flex items-center space-x-2.5 px-3 py-2.5 rounded-xl hover:bg-white/10 text-left text-white/90 hover:text-white transition-colors cursor-pointer w-full"
+              className="flex items-center space-x-2.5 px-3 py-2.5 rounded-xl hover:bg-slate-100 text-left text-slate-800 transition-colors cursor-pointer w-full"
             >
               {isFullscreen ? (
                 <>
-                  <Minimize2 className="w-4 h-4 text-amber-300 shrink-0" />
+                  <Minimize2 className="w-4 h-4 text-amber-600 shrink-0" />
                   <span className="font-medium">Exit Fullscreen</span>
                 </>
               ) : (
                 <>
-                  <Maximize2 className="w-4 h-4 text-amber-300 shrink-0" />
+                  <Maximize2 className="w-4 h-4 text-amber-600 shrink-0" />
                   <span className="font-medium">Full Screen</span>
                 </>
               )}

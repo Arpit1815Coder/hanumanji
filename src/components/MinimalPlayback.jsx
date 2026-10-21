@@ -10,34 +10,34 @@ export default function MinimalPlayback({
   return (
     <div className="relative select-none flex items-center justify-center shrink-0">
       {/* Spotify Single Capsule Dock */}
-      <div className="flex items-center justify-center gap-3.5 min-[380px]:gap-5 sm:gap-6 px-4 min-[380px]:px-5 sm:px-6 py-1.5 sm:py-2 rounded-full bg-black/40 hover:bg-black/50 backdrop-blur-xl border border-white/15 shadow-[0_12px_36px_rgba(0,0,0,0.9)] shrink-0 select-none transition-all">
+      <div className="flex items-center justify-center gap-3.5 min-[380px]:gap-5 sm:gap-6 px-4 min-[380px]:px-5 sm:px-6 py-1.5 sm:py-2 rounded-full bg-white/90 md:bg-black/40 hover:bg-white md:hover:bg-black/50 backdrop-blur-xl border border-slate-200/90 md:border-white/15 shadow-[0_8px_24px_rgba(0,0,0,0.08)] md:shadow-[0_12px_36px_rgba(0,0,0,0.9)] shrink-0 select-none transition-all">
         {/* Previous Mood */}
         <button
           onClick={(e) => {
             e.stopPropagation();
             if (onPrev) onPrev();
           }}
-          className="p-1.5 sm:p-2 text-white/90 hover:text-white active:scale-85 transition-all rounded-full hover:bg-white/10 cursor-pointer"
+          className="p-1.5 sm:p-2 text-slate-700 hover:text-slate-950 md:text-white/90 md:hover:text-white active:scale-85 transition-all rounded-full hover:bg-slate-200/60 md:hover:bg-white/10 cursor-pointer"
           title="Previous Mood (Key: P or Left Arrow)"
           aria-label="Previous Mood"
         >
-          <SkipBack className="w-5 h-5 sm:w-5.5 sm:h-5.5 fill-white text-white" />
+          <SkipBack className="w-5 h-5 sm:w-5.5 sm:h-5.5 fill-slate-800 text-slate-800 md:fill-white md:text-white" />
         </button>
 
-        {/* Central Play / Pause Button - Spotify-Style High Contrast Circle */}
+        {/* Central Play / Pause Button */}
         <button
           onClick={(e) => {
             e.stopPropagation();
             if (onTogglePlay) onTogglePlay();
           }}
-          className="w-12 h-12 min-[380px]:w-13 min-[380px]:h-13 sm:w-14 sm:h-14 rounded-full bg-white text-slate-950 flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.65)] hover:shadow-[0_6px_28px_rgba(255,255,255,0.35)] active:scale-90 transition-all cursor-pointer border border-white/90 shrink-0"
+          className="w-12 h-12 min-[380px]:w-13 min-[380px]:h-13 sm:w-14 sm:h-14 rounded-full bg-slate-900 md:bg-white text-white md:text-slate-950 flex items-center justify-center shadow-[0_4px_16px_rgba(0,0,0,0.2)] md:shadow-[0_4px_20px_rgba(0,0,0,0.65)] hover:shadow-[0_6px_28px_rgba(0,0,0,0.25)] active:scale-90 transition-all cursor-pointer border border-slate-800 md:border-white/90 shrink-0"
           title={isPlaying ? "Pause Chanting (Space)" : "Resume Chanting (Space)"}
           aria-label={isPlaying ? "Pause Chanting" : "Resume Chanting"}
         >
           {isPlaying ? (
-            <Pause className="w-5.5 h-5.5 sm:w-6.5 sm:h-6.5 fill-black text-black" />
+            <Pause className="w-5.5 h-5.5 sm:w-6.5 sm:h-6.5 fill-white text-white md:fill-black md:text-black" />
           ) : (
-            <Play className="w-5.5 h-5.5 sm:w-6.5 sm:h-6.5 fill-black text-black translate-x-0.5" />
+            <Play className="w-5.5 h-5.5 sm:w-6.5 sm:h-6.5 fill-white text-white md:fill-black md:text-black translate-x-0.5" />
           )}
         </button>
 
@@ -47,11 +47,11 @@ export default function MinimalPlayback({
             e.stopPropagation();
             if (onNext) onNext();
           }}
-          className="p-1.5 sm:p-2 text-white/90 hover:text-white active:scale-85 transition-all rounded-full hover:bg-white/10 cursor-pointer"
+          className="p-1.5 sm:p-2 text-slate-700 hover:text-slate-950 md:text-white/90 md:hover:text-white active:scale-85 transition-all rounded-full hover:bg-slate-200/60 md:hover:bg-white/10 cursor-pointer"
           title="Next Mood (Key: N or Right Arrow)"
           aria-label="Next Mood"
         >
-          <SkipForward className="w-5 h-5 sm:w-5.5 sm:h-5.5 fill-white text-white" />
+          <SkipForward className="w-5 h-5 sm:w-5.5 sm:h-5.5 fill-slate-800 text-slate-800 md:fill-white md:text-white" />
         </button>
       </div>
     </div>

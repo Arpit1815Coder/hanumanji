@@ -170,81 +170,87 @@ export default function App() {
         activeMood={activeMood}
       />
 
-      {/* 2. Top Header with Zen-Mode Fade */}
-      <div className={`transition-opacity duration-1000 ${isZenActive ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'}`}>
-        <Header
-          onOpenLyrics={() => setLyricsOpen(true)}
-          onInstallPwa={handleInstallClick}
-          onToggleAarti={() => setAartiActive((prev) => !prev)}
-          isAartiActive={aartiActive}
-        />
-      </div>
+      {/* Main Content Flow */}
+      <div className="flex-1 flex flex-col justify-between items-center w-full z-20">
+        {/* Top Zone: Header + Sacred Darshan Picture (Tightly anchored with no dead space above) */}
+        <div className="w-full flex flex-col items-center">
+          <div className={`w-full transition-opacity duration-1000 ${isZenActive ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'}`}>
+            <Header
+              onOpenLyrics={() => setLyricsOpen(true)}
+              onInstallPwa={handleInstallClick}
+              onToggleAarti={() => setAartiActive((prev) => !prev)}
+              isAartiActive={aartiActive}
+            />
+          </div>
 
-      {/* 3. Center Screen: Mobile Square Picture Card (Center Top) OR Desktop/Tablet Pure Darshan */}
-      <DarshanFrame
-        activeMood={activeMood}
-        isPlaying={isPlaying}
-      />
-      <div className="hidden md:flex flex-1 pointer-events-none" />
-
-      {/* 4. Bottom Controls: Centered Mood Buttons + Centered Playback Dock */}
-      <div className={`relative z-20 w-full px-3 sm:px-6 pb-2.5 sm:pb-4 safe-pb flex flex-col items-center justify-center transition-opacity duration-1000 ${isZenActive ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'}`}>
-        {/* All Moods Aligned in One Line Centered */}
-        <MoodSelectorBar
-          activeMoodId={activeMood.id}
-          onSelectMood={handleMoodSelect}
-          isPlaying={isPlaying}
-        />
-
-        {/* Mobile View (< md): Flanked Playback Console [ 🪔 Aarti Diya ] [ ⏮ ▶/⏸ ⏭ ] [ 📖 चालीसा पाठ ] */}
-        <div className="flex md:hidden items-center justify-center gap-2.5 min-[380px]:gap-3.5 mt-4 min-[380px]:mt-5.5">
-          {/* Left: Aarti Diya Flame Toggle */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setAartiActive((prev) => !prev);
-            }}
-            title={aartiActive ? "Extinguish Aarti Flame" : "Light Aarti Diya Flame (🪔)"}
-            aria-label={aartiActive ? "Extinguish Aarti Flame" : "Light Aarti Diya Flame"}
-            className={`h-11 min-w-[44px] px-3 rounded-full flex items-center justify-center gap-1.5 transition-all duration-300 backdrop-blur-xl cursor-pointer active:scale-90 select-none shadow-[0_8px_24px_rgba(0,0,0,0.7)] ${
-              aartiActive
-                ? 'bg-amber-400 text-slate-950 font-bold border border-amber-200 shadow-[0_0_20px_rgba(245,158,11,0.85)] scale-105'
-                : 'bg-black/40 hover:bg-black/60 border border-white/15 text-amber-200 hover:text-amber-100'
-            }`}
-          >
-            <span className="text-lg filter drop-shadow-[0_0_6px_rgba(245,158,11,0.8)]">🪔</span>
-          </button>
-
-          {/* Center: Retrofy-Style Single Capsule Playback Dock */}
-          <MinimalPlayback
+          <DarshanFrame
+            activeMood={activeMood}
             isPlaying={isPlaying}
-            onTogglePlay={togglePlay}
-            onPrev={prevMood}
-            onNext={nextMood}
           />
-
-          {/* Right: Chalisa Paath (सम्पूर्ण चालीसा पाठ एवं भावार्थ) */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setLyricsOpen(true);
-            }}
-            title="सम्पूर्ण हनुमान चालीसा पाठ एवं भावार्थ (Full Lyrics & Meaning)"
-            aria-label="हनुमान चालीसा पाठ"
-            className="h-11 min-w-[44px] px-3 rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-xl border border-amber-400/35 hover:border-amber-400/70 text-amber-200 hover:text-white flex items-center justify-center gap-1.5 transition-all duration-300 cursor-pointer active:scale-90 select-none shadow-[0_8px_24px_rgba(0,0,0,0.7)]"
-          >
-            <BookOpen className="w-4 h-4 text-amber-300" />
-          </button>
         </div>
 
-        {/* Tablet & Laptop View (>= md): Clean Centered Playback Dock (Original Layout) */}
-        <div className="hidden md:flex items-center justify-center mt-2.5">
-          <MinimalPlayback
+        {/* Desktop/Tablet Pure Darshan Spacer */}
+        <div className="hidden md:flex flex-1 pointer-events-none" />
+
+        {/* Bottom Zone: Fuller Mood Dashboard + Flanked Playback Dock */}
+        <div className={`relative z-20 w-full px-3 sm:px-6 pb-2.5 sm:pb-4 safe-pb flex flex-col items-center justify-center transition-opacity duration-1000 ${isZenActive ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'}`}>
+          {/* All Moods Aligned in 2-2-1 Grid (Mobile) or Horizontal Line (Desktop) */}
+          <MoodSelectorBar
+            activeMoodId={activeMood.id}
+            onSelectMood={handleMoodSelect}
             isPlaying={isPlaying}
-            onTogglePlay={togglePlay}
-            onPrev={prevMood}
-            onNext={nextMood}
           />
+
+          {/* Mobile View (< md): Flanked Playback Console [ 🪔 Aarti Diya ] [ ⏮ ▶/⏸ ⏭ ] [ 📖 चालीसा पाठ ] */}
+          <div className="flex md:hidden items-center justify-center gap-3 min-[380px]:gap-4 mt-3.5 min-[380px]:mt-4 mb-1">
+            {/* Left: Aarti Diya Flame Toggle */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setAartiActive((prev) => !prev);
+              }}
+              title={aartiActive ? "Extinguish Aarti Flame" : "Light Aarti Diya Flame (🪔)"}
+              aria-label={aartiActive ? "Extinguish Aarti Flame" : "Light Aarti Diya Flame"}
+              className={`h-12 w-12 min-w-[48px] rounded-full flex items-center justify-center gap-1.5 transition-all duration-300 backdrop-blur-xl cursor-pointer active:scale-90 select-none shadow-[0_4px_16px_rgba(0,0,0,0.08)] ${
+                aartiActive
+                  ? 'bg-amber-400 text-slate-950 font-bold border border-amber-300 shadow-[0_0_20px_rgba(245,158,11,0.85)] scale-105'
+                  : 'bg-white/90 hover:bg-white border border-slate-200/90 text-slate-800'
+              }`}
+            >
+              <span className="text-xl filter drop-shadow-[0_0_6px_rgba(245,158,11,0.8)]">🪔</span>
+            </button>
+
+            {/* Center: Retrofy-Style Single Capsule Playback Dock */}
+            <MinimalPlayback
+              isPlaying={isPlaying}
+              onTogglePlay={togglePlay}
+              onPrev={prevMood}
+              onNext={nextMood}
+            />
+
+            {/* Right: Chalisa Paath (सम्पूर्ण चालीसा पाठ एवं भावार्थ) */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setLyricsOpen(true);
+              }}
+              title="सम्पूर्ण हनुमान चालीसा पाठ एवं भावार्थ (Full Lyrics & Meaning)"
+              aria-label="हनुमान चालीसा पाठ"
+              className="h-12 w-12 min-w-[48px] rounded-full bg-white/90 hover:bg-white backdrop-blur-xl border border-slate-200/90 text-amber-700 flex items-center justify-center gap-1.5 transition-all duration-300 cursor-pointer active:scale-90 select-none shadow-[0_4px_16px_rgba(0,0,0,0.08)]"
+            >
+              <BookOpen className="w-5 h-5 text-amber-600" />
+            </button>
+          </div>
+
+          {/* Tablet & Laptop View (>= md): Clean Centered Playback Dock (Original Layout) */}
+          <div className="hidden md:flex items-center justify-center mt-2.5">
+            <MinimalPlayback
+              isPlaying={isPlaying}
+              onTogglePlay={togglePlay}
+              onPrev={prevMood}
+              onNext={nextMood}
+            />
+          </div>
         </div>
       </div>
 
