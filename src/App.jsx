@@ -144,7 +144,7 @@ export default function App() {
 
   return (
     <div 
-      className="relative w-screen h-screen overflow-hidden flex flex-col justify-between font-['Outfit',sans-serif] select-none"
+      className="relative w-screen h-screen overflow-hidden flex flex-col justify-between font-['Outfit',sans-serif] select-none bg-[#eceef2] md:bg-black"
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}

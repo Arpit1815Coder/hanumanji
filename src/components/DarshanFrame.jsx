@@ -104,7 +104,7 @@ export default function DarshanFrame({ activeMood, isPlaying }) {
 
         {/* Sacred Darshan Frame - Balanced Proportions for Mobile Screens */}
         <div
-          className={`relative w-[240px] h-[252px] min-[380px]:w-[265px] min-[380px]:h-[278px] min-[410px]:w-[290px] min-[410px]:h-[304px] max-w-[76vw] max-h-[35vh] aspect-[1013/1064] rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_12px_36px_rgba(0,0,0,0.14),0_4px_20px_rgba(245,158,11,0.22)] border-2 border-amber-300/60 transition-transform duration-700 ease-out bg-white/40 ${
+          className={`relative w-[220px] h-[231px] min-[380px]:w-[245px] min-[380px]:h-[257px] min-[410px]:w-[265px] min-[410px]:h-[278px] max-w-[70vw] max-h-[32vh] aspect-[1013/1064] rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_12px_36px_rgba(0,0,0,0.14),0_4px_20px_rgba(245,158,11,0.22)] border-2 border-amber-300/60 transition-transform duration-700 ease-out bg-white/40 ${
             isPlaying ? 'scale-[1.01]' : 'scale-100'
           }`}
         >
