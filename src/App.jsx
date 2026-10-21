@@ -182,10 +182,10 @@ export default function App() {
       />
 
       {/* Main Content Flow */}
-      <div className="flex-1 flex flex-col justify-between items-center w-full z-20">
-        {/* Top & Upper-Middle Zone: Header + Sacred Darshan Picture + Shifted-Up Mood Buttons (Mobile) */}
-        <div className="w-full flex flex-col items-center">
-          <div className={`w-full transition-opacity duration-1000 ${isZenActive ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'}`}>
+      <div className="flex-1 flex flex-col justify-between items-center w-full z-20 h-full">
+        {/* Top Zone (Mobile: Exact 50dvh height, so image bottom touches the exact 50% line of the screen) */}
+        <div className="w-full flex flex-col items-center justify-between md:justify-start h-[50dvh] md:h-auto shrink-0 pb-0">
+          <div className={`w-full transition-opacity duration-1000 shrink-0 ${isZenActive ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'}`}>
             <Header
               onOpenLyrics={() => setLyricsOpen(true)}
               onOpenSuvichar={() => handleOpenSuvichar(-1)}
@@ -195,26 +195,27 @@ export default function App() {
             />
           </div>
 
+          {/* Mobile Darshan Frame (10% increased size, bottom touches exact 50vh of screen) */}
           <DarshanFrame
             activeMood={activeMood}
             isPlaying={isPlaying}
           />
+        </div>
 
-          {/* On Mobile (< md): Mood buttons shifted upwards directly below the picture */}
-          <div className="w-full md:hidden mt-1.5 min-[380px]:mt-2">
+        {/* Desktop/Tablet Pure Darshan Spacer */}
+        <div className="hidden md:flex flex-1 pointer-events-none" />
+
+        {/* Bottom Zone (Mobile: Lower 50dvh for Moods, Progress Bar, Flanked Dock; Desktop: Centered Dock) */}
+        <div className={`relative z-20 w-full px-3 sm:px-6 flex flex-col justify-between md:justify-center items-center h-[50dvh] md:h-auto pb-2 sm:pb-3 safe-pb transition-opacity duration-1000 ${isZenActive ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'}`}>
+          {/* On Mobile (< md): Mood buttons (2-2-1 grid) positioned right below the 50% line */}
+          <div className="w-full md:hidden pt-1.5 min-[380px]:pt-2">
             <MoodSelectorBar
               activeMoodId={activeMood.id}
               onSelectMood={handleMoodSelect}
               isPlaying={isPlaying}
             />
           </div>
-        </div>
 
-        {/* Desktop/Tablet Pure Darshan Spacer */}
-        <div className="hidden md:flex flex-1 pointer-events-none" />
-
-        {/* Bottom Zone: Progress Bar Line + Playback Dock */}
-        <div className={`relative z-20 w-full px-3 sm:px-6 pb-2.5 sm:pb-4 safe-pb flex flex-col items-center justify-center transition-opacity duration-1000 ${isZenActive ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'}`}>
           {/* On Desktop/Tablet (>= md): Mood Selector Bar remains at the bottom in a single horizontal row */}
           <div className="hidden md:block w-full">
             <MoodSelectorBar
@@ -225,7 +226,7 @@ export default function App() {
           </div>
 
           {/* On Mobile (< md): Simple Minimal Line Progress Bar */}
-          <div className="w-full md:hidden">
+          <div className="w-full md:hidden my-auto py-0.5">
             <MinimalProgressBar
               currentTime={currentTime}
               duration={duration}
@@ -234,7 +235,7 @@ export default function App() {
           </div>
 
           {/* Mobile View (< md): Flanked Playback Console [ 🪔 Aarti Diya ] [ ⏮ ▶/⏸ ⏭ ] [ 📖 चालीसा पाठ ] */}
-          <div className="flex md:hidden items-center justify-center gap-3 min-[380px]:gap-4 mt-1 mb-1">
+          <div className="flex md:hidden items-center justify-center gap-3 min-[380px]:gap-4 mt-0.5 mb-1 shrink-0">
             {/* Left: Aarti Diya Flame Toggle */}
             <button
               onClick={(e) => {

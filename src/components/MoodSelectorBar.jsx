@@ -14,7 +14,7 @@ export default function MoodSelectorBar({ activeMoodId, onSelectMood, isPlaying 
           onSelectMood(mood.id);
         }}
         title={isActive ? (isPlaying ? 'Chanting active • Tap to pause' : 'Paused • Tap to chant') : `Switch to ${mood.title}`}
-        className={`w-full h-12 min-[380px]:h-13 px-4 min-[380px]:px-5 rounded-full flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer select-none active:scale-95 border-2 ${
+        className={`w-full h-11 min-[380px]:h-12 px-3.5 min-[380px]:px-4.5 rounded-full flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer select-none active:scale-95 border-2 ${
           isGlowing
             ? 'bg-amber-400 text-slate-950 font-bold border-amber-300 shadow-[0_4px_16px_rgba(245,158,11,0.45)] scale-[1.02]'
             : isActive
@@ -23,7 +23,7 @@ export default function MoodSelectorBar({ activeMoodId, onSelectMood, isPlaying 
         }`}
       >
         <span className="text-base min-[380px]:text-lg shrink-0">{mood.emoji}</span>
-        <span className={`text-xs min-[380px]:text-[13.5px] tracking-wide whitespace-nowrap ${isActive ? 'font-bold text-slate-950' : 'font-semibold text-slate-800'}`}>
+        <span className={`text-xs min-[380px]:text-[13px] tracking-wide whitespace-nowrap ${isActive ? 'font-bold text-slate-950' : 'font-semibold text-slate-800'}`}>
           {mood.title}
         </span>
         {isGlowing ? (
@@ -44,16 +44,16 @@ export default function MoodSelectorBar({ activeMoodId, onSelectMood, isPlaying 
       {/* 1. Mobile Only (< md): Fuller 2 - 2 - 1 Grid Dashboard */}
       <div className="md:hidden w-full max-w-[380px] min-[390px]:max-w-[410px] mx-auto px-1">
         {/* Row 1: 2 buttons */}
-        <div className="grid grid-cols-2 gap-2.5 min-[380px]:gap-3 mb-2.5 min-[380px]:mb-3">
+        <div className="grid grid-cols-2 gap-2 min-[380px]:gap-2.5 mb-2 min-[380px]:mb-2.5">
           {MOODS.slice(0, 2).map(renderMobileMoodBtn)}
         </div>
         {/* Row 2: 2 buttons */}
-        <div className="grid grid-cols-2 gap-2.5 min-[380px]:gap-3 mb-2.5 min-[380px]:mb-3">
+        <div className="grid grid-cols-2 gap-2 min-[380px]:gap-2.5 mb-2 min-[380px]:mb-2.5">
           {MOODS.slice(2, 4).map(renderMobileMoodBtn)}
         </div>
         {/* Row 3: 1 button (centered, matching exact width of items above) */}
         <div className="flex justify-center">
-          <div className="w-[calc(50%-5px)] min-[380px]:w-[calc(50%-6px)]">
+          <div className="w-[calc(50%-4px)] min-[380px]:w-[calc(50%-5px)]">
             {renderMobileMoodBtn(MOODS[4])}
           </div>
         </div>
