@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Download, Maximize2, Minimize2, MoreVertical, BookOpen } from 'lucide-react';
+import { Download, Maximize2, Minimize2, MoreVertical, BookOpen, RefreshCw } from 'lucide-react';
 
 export default function Header({ onOpenLyrics, onInstallPwa, onToggleAarti, isAartiActive }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -35,6 +35,23 @@ export default function Header({ onOpenLyrics, onInstallPwa, onToggleAarti, isAa
     } else {
       document.exitFullscreen().catch(() => {});
     }
+  };
+
+  const handleForceRefresh = async () => {
+    setMenuOpen(false);
+    try {
+      if ('caches' in window) {
+        const keys = await caches.keys();
+        await Promise.all(keys.map((k) => caches.delete(k)));
+      }
+      if ('serviceWorker' in navigator) {
+        const registrations = await navigator.serviceWorker.getRegistrations();
+        await Promise.all(registrations.map((r) => r.unregister()));
+      }
+    } catch {
+      // ignore
+    }
+    window.location.reload();
   };
 
   return (
@@ -135,6 +152,14 @@ export default function Header({ onOpenLyrics, onInstallPwa, onToggleAarti, isAa
                 <span className="font-semibold">Install App</span>
               </button>
             )}
+
+            <button
+              onClick={handleForceRefresh}
+              className="flex items-center space-x-2.5 px-3 py-2.5 rounded-xl hover:bg-slate-100 text-left text-slate-800 transition-colors cursor-pointer w-full"
+            >
+              <RefreshCw className="w-4 h-4 text-amber-600 shrink-0" />
+              <span className="font-medium">Clear Cache & Refresh</span>
+            </button>
 
             <button
               onClick={() => {
