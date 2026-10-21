@@ -5,6 +5,7 @@ import DarshanFrame from './components/DarshanFrame';
 import Header from './components/Header';
 import MoodSelectorBar from './components/MoodSelectorBar';
 import MinimalPlayback from './components/MinimalPlayback';
+import MinimalProgressBar from './components/MinimalProgressBar';
 import AartiDiya from './components/AartiDiya';
 import LyricsModal from './components/LyricsModal';
 import PwaInstallPrompt from './components/PwaInstallPrompt';
@@ -172,7 +173,7 @@ export default function App() {
 
       {/* Main Content Flow */}
       <div className="flex-1 flex flex-col justify-between items-center w-full z-20">
-        {/* Top Zone: Header + Sacred Darshan Picture (Tightly anchored with no dead space above) */}
+        {/* Top & Upper-Middle Zone: Header + Sacred Darshan Picture + Shifted-Up Mood Buttons (Mobile) */}
         <div className="w-full flex flex-col items-center">
           <div className={`w-full transition-opacity duration-1000 ${isZenActive ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'}`}>
             <Header
@@ -187,22 +188,42 @@ export default function App() {
             activeMood={activeMood}
             isPlaying={isPlaying}
           />
+
+          {/* On Mobile (< md): Mood buttons shifted upwards directly below the picture */}
+          <div className="w-full md:hidden mt-1.5 min-[380px]:mt-2">
+            <MoodSelectorBar
+              activeMoodId={activeMood.id}
+              onSelectMood={handleMoodSelect}
+              isPlaying={isPlaying}
+            />
+          </div>
         </div>
 
         {/* Desktop/Tablet Pure Darshan Spacer */}
         <div className="hidden md:flex flex-1 pointer-events-none" />
 
-        {/* Bottom Zone: Fuller Mood Dashboard + Flanked Playback Dock */}
+        {/* Bottom Zone: Progress Bar Line + Playback Dock */}
         <div className={`relative z-20 w-full px-3 sm:px-6 pb-2.5 sm:pb-4 safe-pb flex flex-col items-center justify-center transition-opacity duration-1000 ${isZenActive ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'}`}>
-          {/* All Moods Aligned in 2-2-1 Grid (Mobile) or Horizontal Line (Desktop) */}
-          <MoodSelectorBar
-            activeMoodId={activeMood.id}
-            onSelectMood={handleMoodSelect}
-            isPlaying={isPlaying}
-          />
+          {/* On Desktop/Tablet (>= md): Mood Selector Bar remains at the bottom in a single horizontal row */}
+          <div className="hidden md:block w-full">
+            <MoodSelectorBar
+              activeMoodId={activeMood.id}
+              onSelectMood={handleMoodSelect}
+              isPlaying={isPlaying}
+            />
+          </div>
+
+          {/* On Mobile (< md): Simple Minimal Line Progress Bar */}
+          <div className="w-full md:hidden">
+            <MinimalProgressBar
+              currentTime={currentTime}
+              duration={duration}
+              onSeek={seekTo}
+            />
+          </div>
 
           {/* Mobile View (< md): Flanked Playback Console [ 🪔 Aarti Diya ] [ ⏮ ▶/⏸ ⏭ ] [ 📖 चालीसा पाठ ] */}
-          <div className="flex md:hidden items-center justify-center gap-3 min-[380px]:gap-4 mt-3.5 min-[380px]:mt-4 mb-1">
+          <div className="flex md:hidden items-center justify-center gap-3 min-[380px]:gap-4 mt-1 mb-1">
             {/* Left: Aarti Diya Flame Toggle */}
             <button
               onClick={(e) => {
