@@ -90,7 +90,7 @@ export default function DarshanFrame({ activeMood, isPlaying }) {
   }, [activeMood?.id, activeMood?.imageSrc, isMobile]);
 
   return (
-    <div className="flex-1 md:hidden w-full flex flex-col items-center justify-center pt-1 pb-1 px-3 min-[400px]:px-4 z-10 pointer-events-none select-none">
+    <div className="flex-1 md:hidden w-full flex flex-col items-center justify-start pt-0 min-[380px]:pt-1 pb-1 px-3 min-[400px]:px-4 z-10 pointer-events-none select-none">
       <div className="relative w-full max-w-[420px] group pointer-events-auto flex items-center justify-center">
         {/* Divine Ambient Radial Halo Behind the Picture Card */}
         <div
@@ -104,7 +104,7 @@ export default function DarshanFrame({ activeMood, isPlaying }) {
 
         {/* Full-width as Original with Subtle Side Margins and Original Height Proportions */}
         <div
-          className={`relative w-full aspect-[1013/1064] max-h-[45vh] rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_16px_50px_rgba(0,0,0,0.95),0_0_35px_rgba(245,158,11,0.3)] border border-amber-300/40 transition-transform duration-700 ease-out ${
+          className={`relative w-full aspect-[1013/1064] max-h-[42vh] rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_16px_50px_rgba(0,0,0,0.95),0_0_35px_rgba(245,158,11,0.3)] border border-amber-300/40 transition-transform duration-700 ease-out ${
             isPlaying ? 'scale-[1.01]' : 'scale-100'
           }`}
         >

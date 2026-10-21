@@ -197,7 +197,7 @@ export default function App() {
         />
 
         {/* Mobile View (< md): Flanked Playback Console [ 🪔 Aarti Diya ] [ ⏮ ▶/⏸ ⏭ ] [ 📖 चालीसा पाठ ] */}
-        <div className="flex md:hidden items-center justify-center gap-2.5 min-[380px]:gap-3.5 mt-2">
+        <div className="flex md:hidden items-center justify-center gap-2.5 min-[380px]:gap-3.5 mt-4 min-[380px]:mt-5.5">
           {/* Left: Aarti Diya Flame Toggle */}
           <button
             onClick={(e) => {
