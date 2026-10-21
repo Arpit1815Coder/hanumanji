@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Download, Maximize2, Minimize2, MoreVertical } from 'lucide-react';
+import { Download, Maximize2, Minimize2, MoreVertical, BookOpen } from 'lucide-react';
 
-export default function Header({ onInstallPwa }) {
+export default function Header({ onOpenLyrics, onInstallPwa, onToggleAarti, isAartiActive }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
@@ -51,8 +51,60 @@ export default function Header({ onInstallPwa }) {
         </h1>
       </div>
 
-      {/* Right: 3-Dots Menu with Download / Install App & Fullscreen */}
-      <div className="relative shrink-0" ref={menuRef}>
+      {/* Right on Tablet & Laptop (>= md): Direct Action Buttons (Original Desktop/Tablet Layout) */}
+      <div className="hidden md:flex items-center space-x-2 shrink-0">
+        {/* Aarti Flame Toggle */}
+        <button
+          onClick={onToggleAarti}
+          title={isAartiActive ? "Extinguish Aarti Flame" : "Light Aarti Diya Flame (or long-press anywhere)"}
+          className={`flex items-center space-x-1.5 px-3 py-2 rounded-full transition-all duration-200 shadow-md backdrop-blur-xl text-xs font-semibold cursor-pointer active:scale-95 ${
+            isAartiActive
+              ? 'bg-amber-400 text-slate-950 font-bold border border-amber-200 shadow-[0_0_15px_rgba(245,158,11,0.7)]'
+              : 'bg-slate-950/40 hover:bg-slate-900/60 border border-slate-700/50 hover:border-amber-400/40 text-amber-200 hover:text-white'
+          }`}
+        >
+          <span className="text-sm">🪔</span>
+          <span>आरती</span>
+        </button>
+
+        {/* चालीसा पाठ (Full Lyrics + Meaning) */}
+        <button
+          onClick={onOpenLyrics}
+          title="सम्पूर्ण हनुमान चालीसा पाठ एवं भावार्थ (Full Lyrics & Meaning)"
+          className="flex items-center space-x-1.5 px-3.5 py-2 rounded-full bg-amber-500/20 hover:bg-amber-500/35 border border-amber-400/40 text-amber-100 hover:text-white transition-all duration-200 shadow-md backdrop-blur-xl text-xs font-semibold cursor-pointer active:scale-95"
+        >
+          <BookOpen className="w-3.5 h-3.5 text-amber-300" />
+          <span>पाठ भावार्थ</span>
+        </button>
+
+        {/* PWA Install Button */}
+        {onInstallPwa && (
+          <button
+            onClick={onInstallPwa}
+            title="Install App"
+            className="px-3 py-2 rounded-full bg-slate-950/40 hover:bg-slate-900/60 border border-slate-700/50 hover:border-amber-400/30 text-amber-200 hover:text-white transition-all duration-200 shadow-md backdrop-blur-xl text-xs font-semibold cursor-pointer active:scale-95 flex items-center space-x-1"
+          >
+            <Download className="w-3.5 h-3.5 text-amber-300" />
+            <span>Install</span>
+          </button>
+        )}
+
+        {/* Fullscreen Toggle */}
+        <button
+          onClick={toggleFullscreen}
+          title={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+          className="p-2 rounded-full bg-slate-950/40 hover:bg-slate-800/60 border border-slate-700/50 text-slate-300 hover:text-amber-200 transition-all duration-200 backdrop-blur-xl cursor-pointer active:scale-95"
+        >
+          {isFullscreen ? (
+            <Minimize2 className="w-4 h-4 text-amber-300" />
+          ) : (
+            <Maximize2 className="w-4 h-4 text-amber-300" />
+          )}
+        </button>
+      </div>
+
+      {/* Right on Mobile (< md): 3-Dots Menu with Download & Fullscreen */}
+      <div className="md:hidden relative shrink-0" ref={menuRef}>
         <button
           onClick={(e) => {
             e.stopPropagation();
@@ -68,7 +120,7 @@ export default function Header({ onInstallPwa }) {
         {/* Dropdown Menu */}
         {menuOpen && (
           <div
-            className="absolute right-0 top-full mt-2 w-48 bg-slate-950/90 text-white rounded-2xl shadow-2xl border border-white/15 p-1.5 z-50 flex flex-col text-xs select-none backdrop-blur-2xl animate-fade-in"
+            className="absolute right-0 top-full mt-2 w-48 bg-slate-950/95 text-white rounded-2xl shadow-2xl border border-white/15 p-1.5 z-50 flex flex-col text-xs select-none backdrop-blur-2xl animate-fade-in"
             onClick={(e) => e.stopPropagation()}
           >
             {onInstallPwa && (

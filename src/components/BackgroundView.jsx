@@ -27,6 +27,9 @@ export default function BackgroundView({ isPlaying, activeMood }) {
   const [currentSrc, setCurrentSrc] = useState(
     () => `${activeMood?.imageSrc || '/images/hanuman-original.jpg'}?v=${CACHE_KEY}`
   );
+  const [prevSrc, setPrevSrc] = useState(null);
+  const [isFading, setIsFading] = useState(false);
+  const crossfadeTimerRef = useRef(null);
 
   useEffect(() => {
     let isCancelled = false;
@@ -57,32 +60,68 @@ export default function BackgroundView({ isPlaying, activeMood }) {
         resolvedSrc = `${activeMood?.imageSrc || '/images/hanuman-original.jpg'}?v=${CACHE_KEY}`;
       }
 
-      if (!isCancelled) {
+      if (isCancelled || resolvedSrc === currentSrc) return;
+
+      const loader = new Image();
+      loader.src = resolvedSrc;
+      loader.onload = () => {
+        if (isCancelled) return;
+        if (crossfadeTimerRef.current) clearTimeout(crossfadeTimerRef.current);
+        setPrevSrc(currentSrc);
         setCurrentSrc(resolvedSrc);
-      }
+        setIsFading(true);
+        crossfadeTimerRef.current = setTimeout(() => {
+          setIsFading(false);
+          setPrevSrc(null);
+        }, 700);
+      };
     };
 
     resolveBg();
 
     return () => {
       isCancelled = true;
+      if (crossfadeTimerRef.current) clearTimeout(crossfadeTimerRef.current);
     };
   }, [activeMood?.id, activeMood?.imageSrc, isMobile]);
 
   return (
     <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none select-none z-0 bg-[#070605]">
-      {/* Soft Ambient Blurred Reflection of the Picture (Not a full sharp background) */}
-      <img
-        src={currentSrc}
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 w-full h-full object-cover object-center filter blur-3xl opacity-20 scale-125 pointer-events-none transition-all duration-1000"
-      />
+      {/* 1. Tablet & Laptop (>= md): Full-bleed Immersive Sacred Background Artwork */}
+      <div className="hidden md:block absolute inset-0 w-full h-full">
+        {prevSrc && (
+          <img
+            src={prevSrc}
+            alt="Hanuman Ji"
+            className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-700 ease-out ${
+              isFading ? 'opacity-0' : 'opacity-100'
+            } ${isPlaying ? 'scale-105 brightness-100' : 'scale-100 brightness-95'}`}
+          />
+        )}
+        <img
+          src={currentSrc}
+          alt={activeMood?.title || 'Hanuman Ji'}
+          className={`absolute inset-0 w-full h-full object-cover object-center transition-all duration-700 ease-out ${
+            isFading ? 'opacity-100 animate-fade-in' : 'opacity-100'
+          } ${isPlaying ? 'scale-105 brightness-100' : 'scale-100 brightness-95'}`}
+        />
+        {/* Balanced Vignette for Desktop Wallpaper */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-transparent to-slate-950/85 pointer-events-none" />
+      </div>
 
-      {/* Deep Devotional Twilight Vignette */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0908]/90 via-[#0a0908]/75 to-[#0a0908]/95 pointer-events-none" />
+      {/* 2. Mobile (< md): Soft Ambient Blurred Reflection (Square card is rendered in Center-Top) */}
+      <div className="block md:hidden absolute inset-0 w-full h-full">
+        <img
+          src={currentSrc}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover object-center filter blur-3xl opacity-20 scale-125 pointer-events-none transition-all duration-1000"
+        />
+        {/* Deep Twilight Vignette for Mobile */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0908]/90 via-[#0a0908]/75 to-[#0a0908]/95 pointer-events-none" />
+      </div>
 
-      {/* Radial Warm Golden Divine Aura centered on Hanuman Ji */}
+      {/* Shared: Radial Warm Golden Divine Aura centered on Hanuman Ji */}
       <div
         className="absolute inset-0 transition-opacity duration-1000 opacity-25 mix-blend-screen pointer-events-none"
         style={{
@@ -90,7 +129,7 @@ export default function BackgroundView({ isPlaying, activeMood }) {
         }}
       />
 
-      {/* Cool Cosmic Subtle Rim/Underglow */}
+      {/* Shared: Cool Cosmic Subtle Rim/Underglow */}
       <div
         className="absolute inset-0 pointer-events-none opacity-20 mix-blend-overlay"
         style={{
