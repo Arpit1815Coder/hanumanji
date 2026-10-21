@@ -58,6 +58,7 @@ export default function AartiDiya({ isActive, onClose, initialPos }) {
           top: `${position.y}px`,
           transform: 'translate(-50%, -50%)'
         }}
+        data-no-longpress="true"
         onPointerDown={handlePointerDown}
         onTouchStart={handlePointerDown}
         onDoubleClick={onClose}

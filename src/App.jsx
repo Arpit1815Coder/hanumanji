@@ -76,40 +76,70 @@ export default function App() {
     }
   };
 
-  // Screen Long-Press detection to light Aarti Diya flame
+  // Screen Long-Press detection to light Aarti Diya flame (only on empty screen, not on buttons or controls)
+  const clearLongPress = () => {
+    if (longPressTimerRef.current) {
+      clearTimeout(longPressTimerRef.current);
+      longPressTimerRef.current = null;
+    }
+  };
+
+  useEffect(() => {
+    const handleGlobalEnd = () => clearLongPress();
+    window.addEventListener('pointerup', handleGlobalEnd);
+    window.addEventListener('pointercancel', handleGlobalEnd);
+    window.addEventListener('touchend', handleGlobalEnd);
+    window.addEventListener('touchcancel', handleGlobalEnd);
+    return () => {
+      window.removeEventListener('pointerup', handleGlobalEnd);
+      window.removeEventListener('pointercancel', handleGlobalEnd);
+      window.removeEventListener('touchend', handleGlobalEnd);
+      window.removeEventListener('touchcancel', handleGlobalEnd);
+      clearLongPress();
+    };
+  }, []);
+
   const handlePointerDown = (e) => {
     wakeUp();
-    const x = e.clientX || (e.touches && e.touches[0].clientX);
-    const y = e.clientY || (e.touches && e.touches[0].clientY);
-    if (!x || !y) return;
+    clearLongPress();
+
+    // Do NOT trigger long-press if touching any button, modal, or interactive control
+    if (e.target && e.target.closest && e.target.closest('button, a, input, select, textarea, [role="button"], [data-no-longpress="true"]')) {
+      return;
+    }
+
+    const x = e.clientX ?? (e.touches && e.touches[0]?.clientX);
+    const y = e.clientY ?? (e.touches && e.touches[0]?.clientY);
+    if (x == null || y == null) return;
 
     startPosRef.current = { x, y };
 
+    // Deliberate 750ms intentional long-press required
     longPressTimerRef.current = setTimeout(() => {
       setAartiPos({ x, y });
       setAartiActive(true);
-    }, 450);
+      longPressTimerRef.current = null;
+    }, 750);
   };
 
   const handlePointerMove = (e) => {
     wakeUp();
     if (longPressTimerRef.current) {
-      const x = e.clientX || (e.touches && e.touches[0].clientX);
-      const y = e.clientY || (e.touches && e.touches[0].clientY);
-      const dx = Math.abs(x - startPosRef.current.x);
-      const dy = Math.abs(y - startPosRef.current.y);
-      if (dx > 12 || dy > 12) {
-        clearTimeout(longPressTimerRef.current);
-        longPressTimerRef.current = null;
+      const x = e.clientX ?? (e.touches && e.touches[0]?.clientX);
+      const y = e.clientY ?? (e.touches && e.touches[0]?.clientY);
+      if (x != null && y != null) {
+        const dx = Math.abs(x - startPosRef.current.x);
+        const dy = Math.abs(y - startPosRef.current.y);
+        // If moved even slightly (> 8px), cancel long-press
+        if (dx > 8 || dy > 8) {
+          clearLongPress();
+        }
       }
     }
   };
 
   const handlePointerUp = () => {
-    if (longPressTimerRef.current) {
-      clearTimeout(longPressTimerRef.current);
-      longPressTimerRef.current = null;
-    }
+    clearLongPress();
   };
 
   return (
@@ -118,9 +148,7 @@ export default function App() {
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
-      onTouchStart={handlePointerDown}
-      onTouchMove={handlePointerMove}
-      onTouchEnd={handlePointerUp}
+      onPointerCancel={handlePointerUp}
     >
       {/* Dual HTML5 Audio Elements for Smooth Crossfading */}
       <audio

@@ -90,22 +90,22 @@ export default function DarshanFrame({ activeMood, isPlaying }) {
   }, [activeMood?.id, activeMood?.imageSrc, isMobile]);
 
   return (
-    <div className="flex-1 md:hidden w-full flex flex-col items-center justify-start pt-2 min-[390px]:pt-3 pb-1 px-4 z-10 pointer-events-none select-none">
-      <div className="relative group pointer-events-auto">
-        {/* Divine Ambient Radial Halo Behind the Square Card */}
+    <div className="flex-1 md:hidden w-full flex flex-col items-center justify-center pt-1 pb-1 px-3 min-[400px]:px-4 z-10 pointer-events-none select-none">
+      <div className="relative w-full max-w-[420px] group pointer-events-auto flex items-center justify-center">
+        {/* Divine Ambient Radial Halo Behind the Picture Card */}
         <div
-          className={`absolute -inset-3 sm:-inset-6 rounded-full transition-all duration-1000 pointer-events-none blur-2xl ${
-            isPlaying ? 'opacity-55 scale-105' : 'opacity-25 scale-95'
+          className={`absolute -inset-2.5 rounded-2xl sm:rounded-3xl transition-all duration-1000 pointer-events-none blur-2xl ${
+            isPlaying ? 'opacity-50 scale-105' : 'opacity-20 scale-95'
           }`}
           style={{
             background: `radial-gradient(circle, ${activeMood?.themeColor || '#f59e0b'} 0%, rgba(245, 158, 11, 0.25) 45%, transparent 75%)`
           }}
         />
 
-        {/* Square Sacred Darshan Picture Frame (Preserves native 1:1 square ratio in centre top) */}
+        {/* Full-width as Original with Subtle Side Margins and Original Height Proportions */}
         <div
-          className={`relative w-[210px] h-[210px] min-[360px]:w-[230px] min-[360px]:h-[230px] min-[400px]:w-[260px] min-[400px]:h-[260px] sm:w-[300px] sm:h-[300px] md:w-[340px] md:h-[340px] max-w-[42vh] max-h-[42vh] aspect-square rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_16px_50px_rgba(0,0,0,0.95),0_0_35px_rgba(245,158,11,0.3)] border border-amber-300/40 transition-transform duration-700 ease-out ${
-            isPlaying ? 'scale-[1.02]' : 'scale-100'
+          className={`relative w-full aspect-[1013/1064] max-h-[45vh] rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_16px_50px_rgba(0,0,0,0.95),0_0_35px_rgba(245,158,11,0.3)] border border-amber-300/40 transition-transform duration-700 ease-out ${
+            isPlaying ? 'scale-[1.01]' : 'scale-100'
           }`}
         >
           {/* Previous image during crossfade */}
