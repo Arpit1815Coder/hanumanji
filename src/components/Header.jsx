@@ -21,49 +21,50 @@ export default function Header({ onOpenLyrics, onInstallPwa, onToggleAarti, isAa
   };
 
   return (
-    <header className="relative z-20 w-full px-3 sm:px-8 py-3.5 flex items-center justify-between safe-pt select-none">
+    <header className="relative z-20 w-full px-3 sm:px-6 md:px-8 py-2.5 sm:py-3.5 flex items-center justify-between safe-pt select-none">
       {/* Left: 100% Transparent Sacred Title with Divine Calligraphic Typography */}
-      <div className="flex items-center space-x-2 sm:space-x-2.5 bg-transparent p-0 border-0 outline-none select-none filter drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)]">
+      <div className="flex items-center space-x-1.5 sm:space-x-2.5 bg-transparent p-0 border-0 outline-none select-none filter drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] shrink-0">
         <span className="text-xl sm:text-2xl filter drop-shadow-[0_0_8px_rgba(245,158,11,0.9)]">🕉️</span>
-        <h1 className="font-['Rozha_One',serif] text-lg sm:text-2xl font-normal tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-amber-100 via-amber-200 to-amber-400 leading-tight">
+        <h1 className="font-['Rozha_One',serif] text-base min-[390px]:text-lg sm:text-xl md:text-2xl font-normal tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-amber-100 via-amber-200 to-amber-400 leading-tight">
           श्री हनुमान चालीसा
         </h1>
       </div>
 
-      {/* Right: Aarti Diya, चालीसा पाठ, PWA Install & Fullscreen */}
-      <div className="flex items-center space-x-1.5 sm:space-x-2">
+      {/* Right Action Icons: Aarti Diya, चालीसा पाठ, PWA Install & Fullscreen */}
+      <div className="flex items-center space-x-1 sm:space-x-2 shrink-0">
         {/* Aarti Flame Toggle */}
         <button
           onClick={onToggleAarti}
           title={isAartiActive ? "Extinguish Aarti Flame" : "Light Aarti Diya Flame (or long-press anywhere)"}
-          className={`flex items-center space-x-1 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-full transition-all duration-200 shadow-md backdrop-blur-xl text-xs font-semibold cursor-pointer active:scale-95 ${
+          className={`flex items-center space-x-1 px-2 py-1.5 sm:px-3 sm:py-2 rounded-full transition-all duration-200 shadow-md backdrop-blur-xl text-xs font-semibold cursor-pointer active:scale-95 ${
             isAartiActive
               ? 'bg-amber-400 text-slate-950 font-bold border border-amber-200 shadow-[0_0_15px_rgba(245,158,11,0.7)]'
               : 'bg-slate-950/40 hover:bg-slate-900/60 border border-slate-700/50 hover:border-amber-400/40 text-amber-200 hover:text-white'
           }`}
         >
           <span className="text-xs sm:text-sm">🪔</span>
-          <span className="hidden sm:inline">आरती</span>
+          <span className="hidden md:inline">आरती</span>
         </button>
 
-        {/* चालीसा पाठ (Full Lyrics + Meaning Line by Line) */}
+        {/* चालीसा पाठ (Full Lyrics + Meaning) */}
         <button
           onClick={onOpenLyrics}
           title="सम्पूर्ण हनुमान चालीसा पाठ एवं भावार्थ (Full Lyrics & Meaning)"
-          className="flex items-center space-x-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full bg-amber-500/20 hover:bg-amber-500/35 border border-amber-400/40 text-amber-100 hover:text-white transition-all duration-200 shadow-md backdrop-blur-xl text-xs font-semibold cursor-pointer active:scale-95"
+          className="flex items-center space-x-1 sm:space-x-1.5 px-2.5 py-1.5 sm:px-3.5 sm:py-2 rounded-full bg-amber-500/20 hover:bg-amber-500/35 border border-amber-400/40 text-amber-100 hover:text-white transition-all duration-200 shadow-md backdrop-blur-xl text-[11px] sm:text-xs font-semibold cursor-pointer active:scale-95"
         >
           <BookOpen className="w-3.5 h-3.5 text-amber-300" />
-          <span>चालीसा पाठ</span>
+          <span>पाठ</span>
+          <span className="hidden sm:inline">भावार्थ</span>
         </button>
 
         {/* PWA Install Button */}
         <button
           onClick={onInstallPwa}
           title="Install App"
-          className="flex items-center space-x-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full bg-slate-950/40 hover:bg-slate-900/60 border border-slate-700/50 hover:border-amber-400/30 text-amber-200 hover:text-white transition-all duration-200 shadow-md backdrop-blur-xl text-xs font-semibold cursor-pointer active:scale-95"
+          className="p-1.5 sm:px-3 sm:py-2 rounded-full bg-slate-950/40 hover:bg-slate-900/60 border border-slate-700/50 hover:border-amber-400/30 text-amber-200 hover:text-white transition-all duration-200 shadow-md backdrop-blur-xl text-xs font-semibold cursor-pointer active:scale-95 flex items-center space-x-1"
         >
           <Download className="w-3.5 h-3.5 text-amber-300" />
-          <span className="hidden sm:inline">Install</span>
+          <span className="hidden lg:inline">Install</span>
         </button>
 
         {/* Fullscreen Toggle */}
