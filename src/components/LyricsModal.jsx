@@ -1,8 +1,8 @@
 import React from 'react';
-import { X } from 'lucide-react';
+import { X, Sparkles } from 'lucide-react';
 import { CHALISA_DATA } from '../data/chalisaData';
 
-export default function LyricsModal({ isOpen, onClose }) {
+export default function LyricsModal({ isOpen, onClose, onOpenSuvichar }) {
   if (!isOpen) return null;
 
   return (
@@ -17,7 +17,18 @@ export default function LyricsModal({ isOpen, onClose }) {
       >
         {/* Cool Minimal Header with Centered Title */}
         <div className="relative px-3 sm:px-6 py-3 sm:py-4 border-b border-sky-400/15 flex items-center justify-between bg-transparent shrink-0">
-          <div className="w-8" /> {/* Balance spacer for close button */}
+          {onOpenSuvichar ? (
+            <button
+              onClick={() => onOpenSuvichar(-1)}
+              className="flex items-center space-x-1 px-2.5 py-1 rounded-full bg-amber-500/20 hover:bg-amber-500/35 border border-amber-400/30 text-amber-200 text-xs font-medium transition-all cursor-pointer active:scale-95"
+              title="दैनिक सुविचार व WhatsApp स्टेटस बनाएँ"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-amber-300 animate-pulse" />
+              <span className="hidden sm:inline">सुविचार स्टेटस</span>
+            </button>
+          ) : (
+            <div className="w-8" />
+          )}
 
           <div className="flex items-center space-x-2 sm:space-x-2.5">
             <span className="text-lg sm:text-xl filter drop-shadow-[0_0_8px_rgba(56,189,248,0.5)]">📜</span>
@@ -44,7 +55,7 @@ export default function LyricsModal({ isOpen, onClose }) {
               ॥ प्रारम्भिक दोहा ॥
             </div>
             {CHALISA_DATA.openingDoha.map((doha, i) => (
-              <div key={i} className="py-2.5 sm:py-3.5 border-b border-sky-500/10 space-y-1.5 sm:space-y-2 hover:bg-sky-950/15 transition-colors rounded-xl px-2 sm:px-3 text-center">
+              <div key={i} className="py-2.5 sm:py-3.5 border-b border-sky-500/10 space-y-1.5 sm:space-y-2 hover:bg-sky-950/15 transition-colors rounded-xl px-2 sm:px-3 text-center group">
                 <p className="font-['Tiro_Devanagari_Hindi',serif] text-sm sm:text-base md:text-lg font-medium text-slate-50 whitespace-pre-line leading-relaxed drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
                   {doha.hindi}
                 </p>
@@ -52,6 +63,17 @@ export default function LyricsModal({ isOpen, onClose }) {
                   <span className="text-cyan-300 font-medium">भावार्थ: </span>
                   {doha.meaning}
                 </p>
+                {onOpenSuvichar && (
+                  <div className="pt-1">
+                    <button
+                      onClick={() => onOpenSuvichar(i)}
+                      className="inline-flex items-center space-x-1 text-[11px] text-amber-300/80 hover:text-amber-200 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-400/20 px-2.5 py-0.5 rounded-full transition-all cursor-pointer active:scale-95"
+                    >
+                      <Sparkles className="w-3 h-3 text-amber-400" />
+                      <span>सुविचार स्टेटस कार्ड बनाएँ</span>
+                    </button>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -63,7 +85,7 @@ export default function LyricsModal({ isOpen, onClose }) {
             </div>
 
             {CHALISA_DATA.chaupais.map((c) => (
-              <div key={c.number} className="py-2.5 sm:py-3.5 border-b border-sky-500/10 space-y-1.5 sm:space-y-2 hover:bg-sky-950/15 transition-colors rounded-xl px-2 sm:px-3 text-center">
+              <div key={c.number} className="py-2.5 sm:py-3.5 border-b border-sky-500/10 space-y-1.5 sm:space-y-2 hover:bg-sky-950/15 transition-colors rounded-xl px-2 sm:px-3 text-center group">
                 <p className="font-['Tiro_Devanagari_Hindi',serif] text-sm sm:text-base md:text-lg font-medium text-slate-50 leading-relaxed drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
                   <span className="text-cyan-400 font-bold mr-1.5 sm:mr-2 text-xs sm:text-base">{c.number}.</span>
                   {c.hindi}
@@ -72,6 +94,17 @@ export default function LyricsModal({ isOpen, onClose }) {
                   <span className="text-cyan-300 font-medium">भावार्थ: </span>
                   {c.meaning}
                 </p>
+                {onOpenSuvichar && (
+                  <div className="pt-0.5">
+                    <button
+                      onClick={() => onOpenSuvichar(1 + c.number)}
+                      className="inline-flex items-center space-x-1 text-[11px] text-amber-300/80 hover:text-amber-200 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-400/20 px-2.5 py-0.5 rounded-full transition-all cursor-pointer active:scale-95"
+                    >
+                      <Sparkles className="w-3 h-3 text-amber-400" />
+                      <span>सुविचार स्टेटस कार्ड बनाएँ</span>
+                    </button>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -81,7 +114,7 @@ export default function LyricsModal({ isOpen, onClose }) {
             <div className="text-center font-['Rozha_One',serif] text-[11px] sm:text-xs md:text-sm text-sky-300 font-medium tracking-[0.2em] uppercase drop-shadow-[0_2px_8px_rgba(56,189,248,0.3)]">
               ॥ समापन दोहा ॥
             </div>
-            <div className="py-2.5 sm:py-3.5 space-y-1.5 sm:space-y-2 hover:bg-sky-950/15 transition-colors rounded-xl px-2 sm:px-3 text-center">
+            <div className="py-2.5 sm:py-3.5 space-y-1.5 sm:space-y-2 hover:bg-sky-950/15 transition-colors rounded-xl px-2 sm:px-3 text-center group">
               <p className="font-['Tiro_Devanagari_Hindi',serif] text-sm sm:text-base md:text-lg font-medium text-slate-50 whitespace-pre-line leading-relaxed drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
                 {CHALISA_DATA.closingDoha.hindi}
               </p>
@@ -89,6 +122,17 @@ export default function LyricsModal({ isOpen, onClose }) {
                 <span className="text-cyan-300 font-medium">भावार्थ: </span>
                 {CHALISA_DATA.closingDoha.meaning}
               </p>
+              {onOpenSuvichar && (
+                <div className="pt-0.5">
+                  <button
+                    onClick={() => onOpenSuvichar(42)}
+                    className="inline-flex items-center space-x-1 text-[11px] text-amber-300/80 hover:text-amber-200 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-400/20 px-2.5 py-0.5 rounded-full transition-all cursor-pointer active:scale-95"
+                  >
+                    <Sparkles className="w-3 h-3 text-amber-400" />
+                    <span>सुविचार स्टेटस कार्ड बनाएँ</span>
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

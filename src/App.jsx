@@ -8,6 +8,7 @@ import MinimalPlayback from './components/MinimalPlayback';
 import MinimalProgressBar from './components/MinimalProgressBar';
 import AartiDiya from './components/AartiDiya';
 import LyricsModal from './components/LyricsModal';
+import SuvicharModal from './components/SuvicharModal';
 import PwaInstallPrompt from './components/PwaInstallPrompt';
 import { useDevotionalAudio } from './hooks/useDevotionalAudio';
 import { useZenMode } from './hooks/useZenMode';
@@ -44,8 +45,17 @@ export default function App() {
 
   // Modals State
   const [lyricsOpen, setLyricsOpen] = useState(false);
+  const [suvicharOpen, setSuvicharOpen] = useState(false);
+  const [suvicharIndex, setSuvicharIndex] = useState(0);
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [installModalOpen, setInstallModalOpen] = useState(false);
+
+  const handleOpenSuvichar = (verseIdx = -1) => {
+    if (verseIdx >= 0) {
+      setSuvicharIndex(verseIdx);
+    }
+    setSuvicharOpen(true);
+  };
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (e) => {
@@ -178,6 +188,7 @@ export default function App() {
           <div className={`w-full transition-opacity duration-1000 ${isZenActive ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'}`}>
             <Header
               onOpenLyrics={() => setLyricsOpen(true)}
+              onOpenSuvichar={() => handleOpenSuvichar(-1)}
               onInstallPwa={handleInstallClick}
               onToggleAarti={() => setAartiActive((prev) => !prev)}
               isAartiActive={aartiActive}
@@ -286,8 +297,19 @@ export default function App() {
       <LyricsModal
         isOpen={lyricsOpen}
         onClose={() => setLyricsOpen(false)}
+        onOpenSuvichar={(idx) => {
+          setLyricsOpen(false);
+          handleOpenSuvichar(idx);
+        }}
         currentTime={currentTime}
         duration={duration}
+      />
+
+      {/* Daily Suvichar & WhatsApp Status Generator Modal */}
+      <SuvicharModal
+        isOpen={suvicharOpen}
+        onClose={() => setSuvicharOpen(false)}
+        initialVerseIndex={suvicharIndex}
       />
 
       {/* PWA Install Modal */}

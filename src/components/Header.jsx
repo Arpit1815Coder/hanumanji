@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Download, Maximize2, Minimize2, MoreVertical, BookOpen, RefreshCw } from 'lucide-react';
+import { Download, Maximize2, Minimize2, MoreVertical, BookOpen, RefreshCw, Sparkles } from 'lucide-react';
 
-export default function Header({ onOpenLyrics, onInstallPwa, onToggleAarti, isAartiActive }) {
+export default function Header({ onOpenLyrics, onOpenSuvichar, onInstallPwa, onToggleAarti, isAartiActive }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
@@ -94,6 +94,18 @@ export default function Header({ onOpenLyrics, onInstallPwa, onToggleAarti, isAa
           <span>पाठ भावार्थ</span>
         </button>
 
+        {/* दैनिक सुविचार एवं WhatsApp स्टेटस कार्ड */}
+        {onOpenSuvichar && (
+          <button
+            onClick={onOpenSuvichar}
+            title="दैनिक सुविचार एवं WhatsApp स्टेटस कार्ड बनाएँ (Daily Suvichar & Status Card)"
+            className="flex items-center space-x-1.5 px-3.5 py-2 rounded-full bg-gradient-to-r from-amber-500/25 to-yellow-500/20 hover:from-amber-500/40 hover:to-yellow-500/35 border border-amber-400/50 text-amber-100 hover:text-white transition-all duration-200 shadow-md backdrop-blur-xl text-xs font-semibold cursor-pointer active:scale-95"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-amber-300 animate-pulse" />
+            <span>सुविचार स्टेटस</span>
+          </button>
+        )}
+
         {/* PWA Install Button */}
         {onInstallPwa && (
           <button
@@ -137,9 +149,22 @@ export default function Header({ onOpenLyrics, onInstallPwa, onToggleAarti, isAa
         {/* Dropdown Menu */}
         {menuOpen && (
           <div
-            className="absolute right-0 top-full mt-2 w-48 bg-white/95 text-slate-800 rounded-2xl shadow-2xl border border-slate-200/90 p-1.5 z-50 flex flex-col text-xs select-none backdrop-blur-2xl animate-fade-in"
+            className="absolute right-0 top-full mt-2 w-52 bg-white/95 text-slate-800 rounded-2xl shadow-2xl border border-slate-200/90 p-1.5 z-50 flex flex-col text-xs select-none backdrop-blur-2xl animate-fade-in"
             onClick={(e) => e.stopPropagation()}
           >
+            {onOpenSuvichar && (
+              <button
+                onClick={() => {
+                  setMenuOpen(false);
+                  onOpenSuvichar();
+                }}
+                className="flex items-center space-x-2.5 px-3 py-2.5 rounded-xl bg-amber-50 hover:bg-amber-100/80 text-left text-amber-900 font-semibold transition-colors cursor-pointer w-full border border-amber-200/70 shadow-sm"
+              >
+                <Sparkles className="w-4 h-4 text-amber-600 shrink-0" />
+                <span>दैनिक सुविचार (WhatsApp Status)</span>
+              </button>
+            )}
+
             {onInstallPwa && (
               <button
                 onClick={() => {
