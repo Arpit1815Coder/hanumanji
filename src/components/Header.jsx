@@ -39,14 +39,14 @@ export default function Header({ onOpenLyrics, onInstallPwa, onToggleAarti, isAa
 
   return (
     <header className="relative z-30 w-full px-3.5 sm:px-6 md:px-8 py-2 sm:py-3.5 flex items-center justify-between safe-pt select-none">
-      {/* Left: Clicking on Hanuman Chalisa logo refreshes the app */}
+      {/* Left: Clicking on Hanuman Chalisa logo refreshes the app (Clean, no glow on mobile) */}
       <div
         onClick={() => window.location.reload()}
         title="Tap to refresh Shri Hanuman Chalisa"
-        className="flex items-center space-x-1.5 sm:space-x-2.5 bg-transparent p-0 border-0 outline-none select-none filter drop-shadow-[0_2px_12px_rgba(0,0,0,0.15)] md:drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] shrink-0 cursor-pointer active:scale-95 transition-transform"
+        className="flex items-center space-x-1.5 sm:space-x-2.5 bg-transparent p-0 border-0 outline-none select-none filter-none md:filter md:drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] shrink-0 cursor-pointer active:scale-95 transition-transform"
       >
-        <span className="text-xl sm:text-2xl filter drop-shadow-[0_0_8px_rgba(245,158,11,0.9)]">🕉️</span>
-        <h1 className="font-['Rozha_One',serif] text-base min-[390px]:text-lg sm:text-xl md:text-2xl font-semibold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-amber-900 to-amber-700 md:from-amber-100 md:via-amber-200 md:to-amber-400 leading-tight">
+        <span className="text-xl sm:text-2xl filter-none md:filter md:drop-shadow-[0_0_8px_rgba(245,158,11,0.9)]">🕉️</span>
+        <h1 className="font-['Rozha_One',serif] text-base min-[390px]:text-lg sm:text-xl md:text-2xl font-semibold tracking-wide text-slate-900 md:text-transparent md:bg-clip-text md:bg-gradient-to-r md:from-amber-100 md:via-amber-200 md:to-amber-400 leading-tight">
           श्री हनुमान चालीसा
         </h1>
       </div>

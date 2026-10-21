@@ -90,7 +90,7 @@ export default function DarshanFrame({ activeMood, isPlaying }) {
   }, [activeMood?.id, activeMood?.imageSrc, isMobile]);
 
   return (
-    <div className="md:hidden w-full flex flex-col items-center justify-start pt-1 pb-2 px-3 z-10 pointer-events-none select-none">
+    <div className="md:hidden w-full flex flex-col items-center justify-start pt-3.5 min-[380px]:pt-4.5 pb-2 px-3 z-10 pointer-events-none select-none">
       <div className="relative group pointer-events-auto flex items-center justify-center">
         {/* Divine Ambient Radial Halo Behind the Picture Card */}
         <div
